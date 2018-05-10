@@ -13,6 +13,6 @@
 ## Collaborators
 
 * 서재화 - ladin22
-* 서창범 - 
+* 서창범 - shoulderMaster
 * 이대인 - LazyRen
 
