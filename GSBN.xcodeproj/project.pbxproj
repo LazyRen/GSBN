@@ -14,6 +14,8 @@
 		39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */; };
 		39A34DC020A42F5C004321D9 /* GSBNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DBF20A42F5C004321D9 /* GSBNTests.swift */; };
 		39A34DCB20A42F5C004321D9 /* GSBNUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */; };
+		39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */; };
+		39A34DDB20A43363004321D9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDA20A43363004321D9 /* DataType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		39A34DC620A42F5C004321D9 /* GSBNUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSBNUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSBNUITests.swift; sourceTree = "<group>"; };
 		39A34DCC20A42F5C004321D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextTrainTableViewController.swift; sourceTree = "<group>"; };
+		39A34DDA20A43363004321D9 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 		39A34DA920A42F5B004321D9 /* GSBN */ = {
 			isa = PBXGroup;
 			children = (
+				39A34DDA20A43363004321D9 /* DataType.swift */,
+				39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				39A34DAC20A42F5B004321D9 /* ViewController.swift */,
 				39A34DAE20A42F5B004321D9 /* Main.storyboard */,
@@ -257,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */,
+				39A34DDB20A43363004321D9 /* DataType.swift in Sources */,
+				39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */,
 				39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
