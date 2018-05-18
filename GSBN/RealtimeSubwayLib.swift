@@ -44,8 +44,13 @@ func getRealtimeSubwayPosition () -> Void {
                         return
                     }
                     
+                    guard let positionList = json["realtimePositionList"] as? [[String:Any]] else {
+                        print("parsed JSON referring error")
+                        return
+                    }
+                    
                     //데이터 확인용
-                    print(json)
+                    print(positionList[1])
                     
                 } catch let error as NSError {
                     print("JSON parsing error.")
