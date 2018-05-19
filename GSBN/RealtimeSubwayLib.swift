@@ -142,6 +142,11 @@ class RealtimeSubwayPositions {
                         print("JSON parsing error.")
                         print(error.localizedDescription)
                         
+                        //api 서버가 죽는 경우가 많아서 에러가 났을 때 HTTP 코드를 볼 수 있도록 하는 코드 추가
+                        if let httpResponse = response as? HTTPURLResponse {
+                            print(httpResponse.statusCode)
+                        }
+                        
                     }
                 }
             }
