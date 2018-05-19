@@ -81,57 +81,77 @@ struct realtimeSubwayPositionListEntry {
     }
 }
 
-func getRealtimeSubwayPosition () -> Void {
+class RealtimeSubwayPositions {
+    var positionList : [realtimeSubwayPositionListEntry] = []
     
-    //URL에 한글이 포함되어 URL인코딩을 해야한다.
-    guard let encodedUrl = urlstr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
-        print("why...")
-        return
-    }
-    
-    //디버그용
-    print(url)
-    
-    //request 객체를 만든다.
-    var request : URLRequest = URLRequest(url: url)
-    request.httpMethod = "GET"
-    let session = URLSession.shared
-    
-    //request 객체로 URLSession dataTask 객체를 만든다. 실질적으로 HTTP request를 보낸다.
-    let task = session.dataTask(with: request) { (data, response, error) in
-        
-        if error != nil {
-            print("HTTP Error")
-            print(error!)
-        } else {
-            if let usableData = data {
-                do {
-                    //parse responed JSON data
-                    let jsonSerialized = try JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
-                    
-                    guard let json = jsonSerialized else {
-                        print("parsed JSON referring error")
-                        return
-                    }
-                    
-                    guard let positionList = json["realtimePositionList"] as? [[String:Any]] else {
-                        print("parsed JSON referring error")
-                        return
-                    }
-                    
-                    //데이터 확인용
-                    print(positionList[1])
-                    
-                } catch let error as NSError {
-                    print("JSON parsing error.")
-                    print(error.localizedDescription)
-                }
-            }
+    init() {
+        // updateRealtimeSubwayPosition() 뒤에 클로져를 붙이면 completionHandler가 호출 될 때 실행됨. 이 클로져 == completionHandler임
+        self.getRealtimeSubwayPosition() { updatedPositionList in
+            self.positionList = updatedPositionList
+            print(updatedPositionList)
         }
     }
     
-    task.resume()
+    /* 실시간 지하철 위치정보 API에 HTTP request를 보내서 실시간 지하철 위치정보를 담은 object를 받아옴. */
+    func getRealtimeSubwayPosition (completionHandler: @escaping (_ updatedPositionList : [realtimeSubwayPositionListEntry]) -> Void) -> Void {
+        
+        //URL에 한글이 포함되어 URL인코딩을 해야한다.
+        guard let encodedUrl = urlstr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
+            print("why...")
+            return
+        }
+        
+        //request 객체를 만든다.
+        var request : URLRequest = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let session = URLSession.shared
+        
+        //request 객체로 URLSession dataTask 객체를 만든다. 실질적으로 HTTP request를 보낸다.
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            var PositionListToUpdate : [realtimeSubwayPositionListEntry] = []
+            
+            if error != nil {
+                print("HTTP Error")
+                print(error!)
+            } else {
+                if let usableData = data {
+                    do {
+                        //parse responed JSON data
+                        let jsonSerialized = try JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
+                        
+                        guard let json = jsonSerialized else {
+                            print("parsed JSON referring error")
+                            return
+                        }
+                        
+                        guard let fetchedRealtimePositionList = json["realtimePositionList"] as? [[String:Any]] else {
+                            print("parsed JSON referring error")
+                            return
+                        }
+                        
+                        for entry in fetchedRealtimePositionList {
+                            PositionListToUpdate.append(realtimeSubwayPositionListEntry.init(parsedData: entry))
+                        }
+                        
+                        // 핵심 : callback함수임.
+                        // 여기서 직접적으로 return한다고 넘기고자 하는 object가 안넘어감 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+                        completionHandler(PositionListToUpdate)
+                        
+                    } catch let error as NSError {
+                        print("JSON parsing error.")
+                        print(error.localizedDescription)
+                        
+                    }
+                }
+            }
+        }
+        
+        task.resume()
+    }
 }
 
-//getRealtimeSubwayPosition()
+
+
+//let line2 = RealtimeSubwayPositions.init()
 //RunLoop.main.run()
