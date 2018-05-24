@@ -27,52 +27,52 @@ struct realtimeSubwayPositionListEntry {
     var subwayNm : String = ""  // 2호선       //지하철 호선명
     
     init (parsedData : [String:Any]) {
-        if let fetchedtrainNo = parsedData["trainNo"] as? Int {
-            self.trainNo = fetchedtrainNo
+        if let fetchedtrainNoStr = parsedData["trainNo"] as? String, let fetchedtrainNoInt = Int(fetchedtrainNoStr) {
+            self.trainNo = fetchedtrainNoInt
         }
         
-        if let fetchedstatnTid = parsedData["statnTid"] as? Int {
-            self.statnTid = fetchedstatnTid
+        if let fetchedstatnTidStr = parsedData["statnTid"] as? String, let fetchedstatnTidInt = Int(fetchedstatnTidStr) {
+            self.statnTid = fetchedstatnTidInt
         }
         
         if let fetchedstatnNm = parsedData["statnNm"] as? String {
             self.statnNm = fetchedstatnNm
         }
         
-        if let fetchedtrainSttus = parsedData["trainSttus"] as? Int {
-            self.trainSttus = fetchedtrainSttus
+        if let fetchedtrainSttusStr = parsedData["trainSttus"] as? String, let fetchedtrainSttusInt = Int(fetchedtrainSttusStr) {
+            self.trainSttus = fetchedtrainSttusInt
         }
         
-        if let fetchedtrainSttus = parsedData["directAt"] as? Int {
-            self.directAt = fetchedtrainSttus
+        if let fetchedtrainSttusStr = parsedData["directAt"] as? String, let fetchedtrainSttusInt = Int(fetchedtrainSttusStr) {
+            self.directAt = fetchedtrainSttusInt
         }
         
-        if let fetchedlastRecptnDt = parsedData["lastRecptnDt"] as? Int {
-            self.lastRecptnDt = fetchedlastRecptnDt
+        if let fetchedlastRecptnDtStr = parsedData["lastRecptnDt"] as? String, let fetchedlastRecptnDtInt = Int(fetchedlastRecptnDtStr) {
+            self.lastRecptnDt = fetchedlastRecptnDtInt
         }
         
         if let fetchedstatnTnm = parsedData["statnTnm"] as? String {
             self.statnTnm = fetchedstatnTnm
         }
         
-        if let fetchedsubwayId = parsedData["subwayId"] as? Int {
-            self.subwayId = fetchedsubwayId
+        if let fetchedsubwayIdStr = parsedData["subwayId"] as? String, let fetchedsubwayIdInt = Int(fetchedsubwayIdStr) {
+            self.subwayId = fetchedsubwayIdInt
         }
         
-        if let fetchedupdnLine = parsedData["updnLine"] as? Int {
-            self.updnLine = fetchedupdnLine
+        if let fetchedupdnLineStr = parsedData["updnLine"] as? String, let fetchedupdnLineInt = Int(fetchedupdnLineStr) {
+            self.updnLine = fetchedupdnLineInt
         }
         
-        if let fetchedlstcarAt = parsedData["lstcarAt"] as? Int {
-            self.lstcarAt = fetchedlstcarAt
+        if let fetchedlstcarAtStr = parsedData["lstcarAt"] as? String, let fetchedlstcarAtInt = Int(fetchedlstcarAtStr) {
+            self.lstcarAt = fetchedlstcarAtInt
         }
         
         if let fetchedrecptnDt = parsedData["recptnDt"] as? String {  //당장은 스트링으로 하는데 추후 타임스탬프로 구현. 그래야 시간 연산 용이
             self.recptnDt = fetchedrecptnDt
         }
         
-        if let fetchedstatnId = parsedData["statnId"] as? Int {
-            self.statnId = fetchedstatnId
+        if let fetchedstatnIdStr = parsedData["statnId"] as? String, let fetchedstatnIdInt = Int(fetchedstatnIdStr) {
+            self.statnId = fetchedstatnIdInt
         }
         
         if let fetchedsubwayNm = parsedData["subwayNm"] as? String {
