@@ -22,7 +22,7 @@ struct realtimeSubwayPositionListEntry {
     var subwayId : Int = 0      // 1002       // 지하철 호선 ID
     var updnLine : Int = 0      // 0          // 0 : 상행(외선) 1 : 하행(내선)
     var lstcarAt : Int = 0      // 0          // 막차여부
-    var recptnDt : String = ""  // 2018-05-18 16:47:55      //당장은 스트링으로 하는데 추후 타임스탬프로 구현. 그래야 시간 연산 용이. 수신된 시간
+    var recptnDt : Date = Date()  // 2018-05-18 16:47:55      //당장은 스트링으로 하는데 추후 타임스탬프로 구현. 그래야 시간 연산 용이. 수신된 시간
     var statnId : Int = 0       // 1002000238 //지하철 역 아이디
     var subwayNm : String = ""  // 2호선       //지하철 호선명
     
@@ -68,7 +68,11 @@ struct realtimeSubwayPositionListEntry {
         }
         
         if let fetchedrecptnDt = parsedData["recptnDt"] as? String {  //당장은 스트링으로 하는데 추후 타임스탬프로 구현. 그래야 시간 연산 용이
-            self.recptnDt = fetchedrecptnDt
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            if let time = formatter.date(from: fetchedrecptnDt) {
+                self.recptnDt = time
+            }
         }
         
         if let fetchedstatnIdStr = parsedData["statnId"] as? String, let fetchedstatnIdInt = Int(fetchedstatnIdStr) {
@@ -84,11 +88,17 @@ struct realtimeSubwayPositionListEntry {
 class RealtimeSubwayPositions {
     var positionList : [realtimeSubwayPositionListEntry] = []
     
+    
     init() {
         // updateRealtimeSubwayPosition() 뒤에 클로져를 붙이면 completionHandler가 호출 될 때 실행됨. 이 클로져 == completionHandler임
         self.getRealtimeSubwayPosition() { updatedPositionList in
             self.positionList = updatedPositionList
-            print(updatedPositionList)
+            updatedPositionList.map {
+                print($0.subwayNm, $0.statnNm, $0.statnTnm,
+                      $0.updnLine == 1 ? "내선순환" : "외선순환",
+                      $0.lstcarAt == 1 ? "막차" : "막차 ㄴㄴ",
+                      $0.recptnDt.description(with: Locale(identifier: "ko_KR")))
+            }
         }
     }
     
