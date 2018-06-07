@@ -302,7 +302,7 @@ class GeoConverter {
         let x = geoCoordDatas[destination]!.scaleFactor * n * al * (1 + als / 6 * (1 - t + c + als / 20 * (5 - 18 * t + t * t + 72 * c - 58 * geoCoordDatas[destination]!.esp))) + geoCoordDatas[destination]!.falseEasting
         let y = geoCoordDatas[destination]!.scaleFactor * (ml - geoCoordDatas[destination]!.destinationM + n * tq * (als * (0.5 + als / 24 * (5 - t + 9 * c + 4 * c * c + als / 30 * (61 - 58 * t + t * t + 600 * c - 330 * geoCoordDatas[destination]!.esp))))) + geoCoordDatas[destination]!.falseNorthing
         
-        return GeographicPoint(x: x, y: y)
+        return GeographicPoint(x: x + 90, y: y + 300)
     }
     
     private func tmToGeodetic(source: MapProjectionType, inputPoint: GeographicPoint) -> GeographicPoint? {
