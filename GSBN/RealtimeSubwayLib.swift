@@ -82,6 +82,30 @@ struct realtimeSubwayPositionListEntry {
     }
 }
 
+struct stations {
+    var lineSet : Set<String> = []
+    var stationList : Array<String> = []
+    
+    init (parsedData : [[String:Any]]) {
+        lineSet = []
+        stationList = []
+        
+        for station in parsedData {
+            if let stationName = station["statnNm"] as? String {
+                if !stationList.contains(stationName) {
+                    stationList.append(stationName)
+                }
+            }
+            
+            if let lineName = station["subwayNm"] as? String {
+                lineSet.insert(lineName)
+            }
+            
+        }
+        return
+    }
+}
+
 class RealtimeSubwayPositions {
     var positionList : [realtimeSubwayPositionListEntry] = []
     let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/realtimePosition/0/50/"
