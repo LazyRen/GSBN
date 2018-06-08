@@ -167,6 +167,76 @@ class RealtimeSubwayPositions {
 }
 
 
+class RealtimeSubwayNearestStations {
+    let convert : GeoConverter
+    var currentPosition : GeographicPoint
+    let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/5/"
+    
+    init(WGS_N : Double, WGS_E : Double) {
+        convert = GeoConverter()
+        currentPosition = GeographicPoint(x: WGS_N, y: WGS_E)
+        if let TmPosition = convert.convert(sourceType: .WGS_84, destinationType: .TM, geoPoint: currentPosition) {
+            currentPosition = TmPosition
+            print(TmPosition)
+        }
+        return
+    }
+    
+    /* 실시간 지하철 위치정보 API에 HTTP request를 보내서 실시간 지하철 위치정보를 담은 object를 받아옴. */
+    func getNearestStations () -> Void {
+        
+        //URL에 한글이 포함되어 URL인코딩을 해야한다.
+        guard let encodedUrl = (apistr + String(currentPosition.x) + "/" + String(currentPosition.y)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
+            print("why...")
+            return
+        }
+        
+        //request 객체를 만든다.
+        var request : URLRequest = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let session = URLSession.shared
+        
+        //request 객체로 URLSession dataTask 객체를 만든다. 실질적으로 HTTP request를 보낸다.
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print("HTTP Error")
+                print(error!)
+            } else {
+                if let usableData = data {
+                    do {
+                        //parse responed JSON data
+                        let jsonSerialized = try JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
+                        
+                        guard let json = jsonSerialized else {
+                            print("parsed JSON referring error")
+                            return
+                        }
+                        
+                        print(json)
+                        
+                    } catch let error as NSError {
+                        print("JSON parsing error.")
+                        print(error.localizedDescription)
+                        
+                        //api 서버가 죽는 경우가 많아서 에러가 났을 때 HTTP 코드를 볼 수 있도록 하는 코드 추가
+                        if let httpResponse = response as? HTTPURLResponse {
+                            print(httpResponse.statusCode)
+                        }
+                        
+                    }
+                }
+                
+            }
+        }
+        
+        task.resume()
+    }
+}
 
+
+//test code 플레이 그라운드에서 실행해보면됨
 //let line2 = RealtimeSubwayPositions.init(whichLine : "2호선")
+//let nearlistStation = RealtimeSubwayNearestStations.init(WGS_N: 127.037194, WGS_E: 37.561750)
+//nearlistStation.getNearestStations()
 //RunLoop.main.run()
