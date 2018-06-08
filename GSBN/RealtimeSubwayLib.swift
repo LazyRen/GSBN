@@ -8,9 +8,6 @@
 
 import Foundation
 
-//test api url
-let urlstr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/realtimePosition/0/50/2호선"
-
 struct realtimeSubwayPositionListEntry {
     var trainNo : Int = 0       // 2300       // 열차번호
     var statnTid : Int = 0      // 1002000211 // 종착지하철역아이디
@@ -87,9 +84,12 @@ struct realtimeSubwayPositionListEntry {
 
 class RealtimeSubwayPositions {
     var positionList : [realtimeSubwayPositionListEntry] = []
+    let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/realtimePosition/0/50/"
+    var line = ""
     
-    
-    init() {
+    init(whichLine : String) {
+        line = whichLine;
+        
         // updateRealtimeSubwayPosition() 뒤에 클로져를 붙이면 completionHandler가 호출 될 때 실행됨. 이 클로져 == completionHandler임
         self.getRealtimeSubwayPosition() { updatedPositionList in
             self.positionList = updatedPositionList
@@ -106,7 +106,7 @@ class RealtimeSubwayPositions {
     func getRealtimeSubwayPosition (completionHandler: @escaping (_ updatedPositionList : [realtimeSubwayPositionListEntry]) -> Void) -> Void {
         
         //URL에 한글이 포함되어 URL인코딩을 해야한다.
-        guard let encodedUrl = urlstr.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
+        guard let encodedUrl = (apistr + line).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
             print("why...")
             return
         }
@@ -168,5 +168,5 @@ class RealtimeSubwayPositions {
 
 
 
-//let line2 = RealtimeSubwayPositions.init()
+//let line2 = RealtimeSubwayPositions.init(whichLine : "2호선")
 //RunLoop.main.run()
