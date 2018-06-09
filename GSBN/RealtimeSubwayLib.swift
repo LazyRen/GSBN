@@ -111,6 +111,103 @@ struct stations {
     }
 }
 
+struct arrivalInfoEntry {
+    var stationId : Int = 0          //기준 지하철 역 ID
+    var stationName : String = ""    //기준 지하철 역 이름
+    var lineId : Int = 0             //지하철 호선 ID
+    var lineName : String            //지하철 호선 이름
+    var updownFlag : Int = 0         //상하행 구분  // 0 : 상행(외선) 1 : 하행(내선)
+    var updownMsg : String = ""      //상하행 구분 str
+    
+    var terminusId : Int = 0         //종착 지하철역 ID
+    var terminusName : String = ""   //종착 지하철역 이름 (막차 정보 포함)
+    var directionInfo : String = ""  //종착역 + 방면 (막차 정보 포함)
+    var expressFlag : Int = 0        //급행여부
+    var lastFlag : Int = 0           //막차여부
+    var trainId : Int = 0            //해당 열차 ID
+    var curStationId : Int = 0       //해당 열차 위치한 역 ID
+    var curStationName : String = "" //해당 열차 위치한 역 이름
+    
+    var arrivalCode : Int = 0        //도착코드
+    var arrivalMsg : String = ""     //도착코드 메세지
+    var leftTime : Int = 0           //열차 도착 예정시간 (남은시간 초)
+    var leftTimeMsg : String = ""    //도착 예정시간 메세지
+    
+    init(parsedData : [String : String], whichLine : String) {
+        if let fetchedStationName = parsedData["statnNm"] {
+            stationName = fetchedStationName
+        }
+        
+        lineName = whichLine
+        
+        if let fetchedTerminusName = parsedData["bstatnNm"] {
+            terminusName = fetchedTerminusName
+        }
+        
+        if let fetchedDiretionInfo = parsedData["trainLineNm"] {
+            directionInfo = fetchedDiretionInfo
+            if fetchedDiretionInfo.contains("막차") {
+                lastFlag = 1
+            }
+        }
+        
+        if let fetchedCurStationName = parsedData["arvlMsg3"] {
+            curStationName = fetchedCurStationName
+        }
+        
+        if let fetchedArrivalMsg = parsedData["arvlMsg2"] {
+            arrivalMsg = fetchedArrivalMsg
+        }
+        
+        if let fetchedStationId = parsedData["statnId"], let fetchedStationIdInt = Int(fetchedStationId) {
+            stationId = fetchedStationIdInt
+        }
+        
+        if let fetchedLineId = parsedData["subwayId"], let fetchedLineIdInt = Int(fetchedLineId) {
+            lineId = fetchedLineIdInt
+        }
+        
+        if let fetchedUpdownFlag = parsedData["updnLine"] {
+            updownMsg = fetchedUpdownFlag
+            if fetchedUpdownFlag == "하행" || fetchedUpdownFlag == "내선" {
+                updownFlag = 1
+            }
+        }
+        
+        if let fetchedTerminusId = parsedData["bstatnId"], let fetchedTerminusIdInt = Int(fetchedTerminusId) {
+            terminusId = fetchedTerminusIdInt
+        }
+        
+        if let fetchedExpressFlag = parsedData["btrainSttus"] {
+            if fetchedExpressFlag == "급행" {
+                expressFlag = 1
+            }
+        }
+        
+        if let fetchedTrainId = parsedData["btrainNo"], let fetchedTrainIdInt = Int(fetchedTrainId) {
+            trainId = fetchedTrainIdInt
+        }
+        
+        if let fetchedCurStationId = parsedData["bstatnId"], let fetchedCurStationIdInt = Int(fetchedCurStationId) {
+            curStationId = fetchedCurStationIdInt
+        }
+        
+        if let fetchedArrivalCode = parsedData["arvlCd"], let fetchedArrivalCodeInt = Int(fetchedArrivalCode) {
+            arrivalCode = fetchedArrivalCodeInt
+        }
+        
+        if let fetchedLeftTime = parsedData["barvlDt"], let fetchedLeftTimeInt = Int(fetchedLeftTime) {
+            leftTime = fetchedLeftTimeInt
+        }
+        
+        if let fetchedLeftTimeMsg = parsedData["arvlMsg2"] {
+            leftTimeMsg = fetchedLeftTimeMsg
+        }
+        
+    }
+}
+
+
 class RealtimeSubwayPositions {
     var positionList : [realtimeSubwayPositionListEntry] = []
     let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/realtimePosition/0/50/"
