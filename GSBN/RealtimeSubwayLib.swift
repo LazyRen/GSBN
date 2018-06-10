@@ -473,31 +473,31 @@ class realtimeSubwayArrivalInfo {
 
 //사용 예시
 /*
- /* RealtimeSubwayNearestStations 클래스에 현재 좌표를 입력하고 초기화를 한다. */
- let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: 127.041773, WGS_E: 37.560591)
- 
- /* getNearestStations 메소드를 호출하여 completionhandler에 인자로 stations 구조체에 인접 지하철 정보를 받아온다 */
- nearestStation.getNearestStations { (fetchedStations) in
- /* nearestStation.stationInfo.stationOrderList[0] 에는 가장 우선순위가 높은 지하철역 이름이 저장돼있다
- 해당 지하철역에 지나는 호선들과 호선들의 고유번호가 저장돼있는 정보를 가져온다.*/
- if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[1]] {
- // realtimeSubwayArrivalInfo 에 도착정보를 가져올 역이름과 해당 역에 지나는 호선 정보를 넘겨 초기화한다.
- let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
- // 초기화된 정보를 가지고 도착정보를 가져온다.
- curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
- fetchedArrivalInfo.keys.map({ (line) -> Void in
- fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
- if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
- entrys.map({ (entry) -> Void in
- print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
- })
- }
- })
- })
- })
- }
- }
- 
- 
- RunLoop.main.run()
- */
+/* RealtimeSubwayNearestStations 클래스에 현재 좌표를 입력하고 초기화를 한다. */
+let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: 127.041773, WGS_E: 37.560591)
+
+/* getNearestStations 메소드를 호출하여 completionhandler에 인자로 stations 구조체에 인접 지하철 정보를 받아온다 */
+nearestStation.getNearestStations { (fetchedStations) in
+    /* nearestStation.stationInfo.stationOrderList[0] 에는 가장 우선순위가 높은 지하철역 이름이 저장돼있다
+     해당 지하철역에 지나는 호선들과 호선들의 고유번호가 저장돼있는 정보를 가져온다.*/
+    if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[1]] {
+        // realtimeSubwayArrivalInfo 에 도착정보를 가져올 역이름과 해당 역에 지나는 호선 정보를 넘겨 초기화한다.
+        let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
+        // 초기화된 정보를 가지고 도착정보를 가져온다.
+        curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
+            fetchedArrivalInfo.keys.map({ (line) -> Void in
+                fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
+                    if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
+                        entrys.map({ (entry) -> Void in
+                            print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
+                        })
+                    }
+                })
+            })
+        })
+    }
+}
+
+
+RunLoop.main.run()
+*/
