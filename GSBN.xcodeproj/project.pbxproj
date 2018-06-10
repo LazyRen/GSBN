@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391B6B2820CD1E3C00FBEBE0 /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391B6B2720CD1E3C00FBEBE0 /* GeoConverter.swift */; };
 		398DF3E920CCFA72004E14E7 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 398DF3E820CCFA72004E14E7 /* stations.json */; };
 		39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DAA20A42F5B004321D9 /* AppDelegate.swift */; };
 		39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DAC20A42F5B004321D9 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		391B6B2720CD1E3C00FBEBE0 /* GeoConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		398DF3E820CCFA72004E14E7 /* stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
 		39A34DA720A42F5B004321D9 /* GSBN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSBN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A34DAA20A42F5B004321D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				39A34DAC20A42F5B004321D9 /* ViewController.swift */,
+				391B6B2720CD1E3C00FBEBE0 /* GeoConverter.swift */,
 				39A34DAE20A42F5B004321D9 /* Main.storyboard */,
 				39A34DB120A42F5C004321D9 /* Assets.xcassets */,
 				39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */,
@@ -281,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				391B6B2820CD1E3C00FBEBE0 /* GeoConverter.swift in Sources */,
 				39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */,
 				39A34DDB20A43363004321D9 /* DataType.swift in Sources */,
 				39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */,

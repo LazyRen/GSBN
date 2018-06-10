@@ -22,10 +22,10 @@ struct station: Decodable{
     var fr_code: String
 }
 
-func getNearestStations (fetchLoc:CLLocationCoordinate2D?, completionHandler: @escaping (_ fetchedData : [[String:Any]]) -> Void) -> Void {
+func getNearestStations (fetchLoc:GeographicPoint?, completionHandler: @escaping (_ fetchedData : [[String:Any]]) -> Void) -> Void {
     let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/5/"
     if let locVal = fetchLoc {
-        guard let encodedUrl = (apistr + String(locVal.latitude) + "/" + String(locVal.longitude)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
+        guard let encodedUrl = (apistr + String(locVal.x) + "/" + String(locVal.y)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
             print("failed to encode URL")
             return
         }
@@ -128,7 +128,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         resultLabel.text = "lat = \(locValue.latitude)"
         resultLabel2.text = "lon = \(locValue.longitude)"
-        getNearestStations(fetchLoc: locValue) { fetchedData in
+        let convert : GeoConverter = GeoConverter()
+        var currentPosition : GeographicPoint = GeographicPoint(x: locValue.longitude, y: locValue.latitude)
+        if let TmPosition = convert.convert(sourceType: .WGS_84, destinationType: .TM, geoPoint: currentPosition) {
+            currentPosition = TmPosition
+            print(TmPosition)
+        }
+        else {
+            print("failed to convert")
+        }
+        print("position converted: \(currentPosition)")
+        getNearestStations(fetchLoc: currentPosition) { fetchedData in
             print(fetchedData[0])
         }
     }
