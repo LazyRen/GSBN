@@ -39,12 +39,14 @@ class NextTrainTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath) as! TrainTableViewCell
 
         // Configure the cell...
-        let train = nextTrains.trains[indexPath.row]
-        cell.textLabel!.text = train.name + " : " + train.currentStation
-        cell.detailTextLabel!.text = "도착예정시간: " + train.estimatedArrival
+//        let train = nextTrains.trains[indexPath.row]
+        cell.trainCell = nextTrains.trains[indexPath.row]
+//        cell.textLabel!.text = train.name + " : " + train.currentStation
+//        cell.detailTextLabel!.text = "도착예정시간: " + train.estimatedArrival
+//        cell.imageView.image = UIImage(named:train.imageName)
         
         return cell
     }

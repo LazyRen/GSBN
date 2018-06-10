@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		398DF3E920CCFA72004E14E7 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 398DF3E820CCFA72004E14E7 /* stations.json */; };
 		39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DAA20A42F5B004321D9 /* AppDelegate.swift */; };
 		39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DAC20A42F5B004321D9 /* ViewController.swift */; };
 		39A34DB020A42F5B004321D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A34DAE20A42F5B004321D9 /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 		39A34DCB20A42F5C004321D9 /* GSBNUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */; };
 		39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */; };
 		39A34DDB20A43363004321D9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDA20A43363004321D9 /* DataType.swift */; };
+		39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */; };
+		39AC641720B3550600D31F84 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AC641620B3550600D31F84 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		398DF3E820CCFA72004E14E7 /* stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
 		39A34DA720A42F5B004321D9 /* GSBN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSBN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A34DAA20A42F5B004321D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39A34DAC20A42F5B004321D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 		39A34DCC20A42F5C004321D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextTrainTableViewController.swift; sourceTree = "<group>"; };
 		39A34DDA20A43363004321D9 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
+		39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTableViewCell.swift; sourceTree = "<group>"; };
+		39AC641620B3550600D31F84 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39AC641720B3550600D31F84 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +92,7 @@
 				39A34DBE20A42F5C004321D9 /* GSBNTests */,
 				39A34DC920A42F5C004321D9 /* GSBNUITests */,
 				39A34DA820A42F5B004321D9 /* Products */,
+				39AC641520B3550600D31F84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,8 +109,10 @@
 		39A34DA920A42F5B004321D9 /* GSBN */ = {
 			isa = PBXGroup;
 			children = (
+				398DF3E820CCFA72004E14E7 /* stations.json */,
 				39A34DDA20A43363004321D9 /* DataType.swift */,
 				39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */,
+				39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				39A34DAC20A42F5B004321D9 /* ViewController.swift */,
 				39A34DAE20A42F5B004321D9 /* Main.storyboard */,
@@ -129,6 +139,14 @@
 				39A34DCC20A42F5C004321D9 /* Info.plist */,
 			);
 			path = GSBNUITests;
+			sourceTree = "<group>";
+		};
+		39AC641520B3550600D31F84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39AC641620B3550600D31F84 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +255,7 @@
 			files = (
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
+				398DF3E920CCFA72004E14E7 /* stations.json in Resources */,
 				39A34DB020A42F5B004321D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +284,7 @@
 				39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */,
 				39A34DDB20A43363004321D9 /* DataType.swift in Sources */,
 				39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */,
+				39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */,
 				39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
