@@ -22,10 +22,10 @@ struct station: Decodable{
     var fr_code: String
 }
 
-func getNearestStations (fetchLoc:CLLocationCoordinate2D?, completionHandler: @escaping (_ fetchedData : [[String:Any]]) -> Void) -> Void {
+func getNearestStations (fetchLoc:GeographicPoint?, completionHandler: @escaping (_ fetchedData : [[String:Any]]) -> Void) -> Void {
     let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/5/"
     if let locVal = fetchLoc {
-        guard let encodedUrl = (apistr + String(locVal.latitude) + "/" + String(locVal.longitude)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
+        guard let encodedUrl = (apistr + String(locVal.x) + "/" + String(locVal.y)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
             print("failed to encode URL")
             return
         }
@@ -79,7 +79,8 @@ func getNearestStations (fetchLoc:CLLocationCoordinate2D?, completionHandler: @e
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     let locationManager = CLLocationManager()
-    
+    var nearestStationX: Double = 0.0
+    var nearestStationY: Double = 0.0
     @IBOutlet weak var myMapKitView: MKMapView!
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var resultLabel2: UILabel!
@@ -104,32 +105,90 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 break;
             }
         }
+        
         enableLocationServices()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
-        if let path = Bundle.main.path(forResource: "stations", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let stations = jsonResult["station"] as? [Any] {
-                    print("parse json succeed")
-                }
-            } catch {
-                print("failed to parse json file")
-            }
-        }
+//        if let path = Bundle.main.path(forResource: "stations", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let stations = jsonResult["station"] as? [Any] {
+//                    print("JSON parse succeed")
+//                }
+//            } catch {
+//                print("failed to parse json file")
+//            }
+//        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Get current position
         let location = locations.first!
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500)
+        let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
         myMapKitView.setRegion(coordinateRegion, animated: true)
+        
 //        locationManager.stopUpdatingLocation()
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         resultLabel.text = "lat = \(locValue.latitude)"
         resultLabel2.text = "lon = \(locValue.longitude)"
-        getNearestStations(fetchLoc: locValue) { fetchedData in
+        let convert : GeoConverter = GeoConverter()
+        var currentPosition : GeographicPoint = GeographicPoint(x: locValue.longitude, y: locValue.latitude)
+        if let TmPosition = convert.convert(sourceType: .WGS_84, destinationType: .TM, geoPoint: currentPosition) {
+            currentPosition = TmPosition
+            print(TmPosition)
+        }
+        else {
+            print("failed to convert")
+        }
+        
+        print("position converted: \(currentPosition)")
+        getNearestStations(fetchLoc: currentPosition) { fetchedData in
             print(fetchedData[0])
+            if let tmp = fetchedData[0]["subwayXcnts"] as? String {
+                if let x = Double(tmp) {
+                    self.nearestStationX = Double(x)
+                }
+                
+            }
+            if let tmp = fetchedData[0]["subwayYcnts"] as? String {
+                if let y = Double(tmp) {
+                    self.nearestStationY = Double(y)
+                }
+            }
+//            print("\n")
+//            print("\(self.nearestStationX), \(self.nearestStationY)")
+//            print("\n")
+            
+            var stationPosition : GeographicPoint = GeographicPoint(x: self.nearestStationX, y: self.nearestStationY)
+            if let TmPosition = convert.convert(sourceType: .TM, destinationType: .WGS_84, geoPoint: stationPosition) {
+                stationPosition = TmPosition
+                print(TmPosition)
+            }
+            
+            // Get destination position
+            let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
+            let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
+            let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+            
+            // Create request
+            let request = MKDirectionsRequest()
+            request.source = sourceMapItem
+            request.destination = destinationMapItem
+            request.transportType = MKDirectionsTransportType.walking
+            request.requestsAlternateRoutes = false
+            let directions = MKDirections(request: request)
+            directions.calculate { response, error in
+                if let route = response?.routes.first {
+                    print(location)
+                    print(destinationCoordinates)
+                    print("Distance: \(route.distance), ETA: \(route.expectedTravelTime)")
+                } else {
+                    print("Error!")
+                }
+            }
         }
     }
     override func didReceiveMemoryWarning() {
