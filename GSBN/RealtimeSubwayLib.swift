@@ -136,7 +136,7 @@ struct arrivalInfoEntry {
     var arrivalCode : Int = 0        //도착코드
     var arrivalMsg : String = ""     //도착코드 메세지
     var leftTime : Int = 0           //열차 도착 예정시간 (남은시간 초)
-    var leftTimeMsg : String = ""    //도착 예정시간 메세지
+    //var leftTimeMsg : String = ""    //도착 예정시간 메세지
     
     init(parsedData : [String : Any]) {
         if let fetchedStationName = parsedData["statnNm"] as? String {
@@ -203,10 +203,6 @@ struct arrivalInfoEntry {
         
         if let fetchedLeftTime = parsedData["barvlDt"] as? String, let fetchedLeftTimeInt = Int(fetchedLeftTime) {
             leftTime = fetchedLeftTimeInt
-        }
-        
-        if let fetchedLeftTimeMsg = parsedData["arvlMsg2"] as? String {
-            leftTimeMsg = fetchedLeftTimeMsg
         }
         
     }
@@ -489,7 +485,7 @@ nearestStation.getNearestStations { (fetchedStations) in
                 fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
                     if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
                         entrys.map({ (entry) -> Void in
-                            print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
+                            print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.arrivalMsg, String(entry.leftTime) + "초 후 도착")
                         })
                     }
                 })
