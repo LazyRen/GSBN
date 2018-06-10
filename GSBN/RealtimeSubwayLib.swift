@@ -85,22 +85,24 @@ struct realtimeSubwayPositionListEntry {
 struct stations {
     var lineSet : Set<String> = []
     var stationOrderList : [String] = []
-    var stationList : [(stationName : String, lineName : String, stationId : Int, lineId : Int)] = []
+    var stationList : [String : [(lineName : String, lineId : Int)]] = [:]
     
     
     init (parsedData : [[String:Any]]) {
         lineSet = []
-        stationList = []
+        stationList = [:]
         
         for station in parsedData {
             if let stationName = station["statnNm"] as? String,
                 let lineName = station["subwayNm"] as? String,
-                let fetchedStationId = station["statnId"] as? String,
-                let stationId = Int(fetchedStationId),
                 let fetchedlineId = station["subwayId"] as? String,
                 let lineId = Int(fetchedlineId) {
                 
-                stationList.append((stationName, lineName, stationId, lineId))
+                if stationList[stationName] == nil {
+                    stationList[stationName] = []
+                }
+                
+                stationList[stationName]?.append((lineName, lineId))
                 
                 if !stationOrderList.contains(stationName) {
                     stationOrderList.append(stationName)
@@ -117,7 +119,7 @@ struct stations {
     
     init() {
         lineSet = []
-        stationList = []
+        stationList = [:]
         stationOrderList = []
     }
 }
