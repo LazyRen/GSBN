@@ -1,11 +1,3 @@
-//
-//  RealtimeSubwayLib.swift
-//  GSBN
-//
-//  Created by 서창범 on 2018. 5. 18..
-//  Copyright © 2018년 Lazy Ren. All rights reserved.
-//
-
 import Foundation
 
 struct realtimeSubwayPositionListEntry {
@@ -128,7 +120,7 @@ struct arrivalInfoEntry {
     var stationId : Int = 0          //기준 지하철 역 ID
     var stationName : String = ""    //기준 지하철 역 이름
     var lineId : Int = 0             //지하철 호선 ID
-    var lineName : String            //지하철 호선 이름
+    //var lineName : String            //지하철 호선 이름
     var updownFlag : Int = 0         //상하행 구분  // 0 : 상행(외선) 1 : 하행(내선)
     var updownMsg : String = ""      //상하행 구분 str
     
@@ -146,74 +138,74 @@ struct arrivalInfoEntry {
     var leftTime : Int = 0           //열차 도착 예정시간 (남은시간 초)
     var leftTimeMsg : String = ""    //도착 예정시간 메세지
     
-    init(parsedData : [String : String], whichLine : String) {
-        if let fetchedStationName = parsedData["statnNm"] {
+    init(parsedData : [String : Any]) {
+        if let fetchedStationName = parsedData["statnNm"] as? String {
             stationName = fetchedStationName
         }
         
-        lineName = whichLine
+        //lineName = whichLine
         
-        if let fetchedTerminusName = parsedData["bstatnNm"] {
+        if let fetchedTerminusName = parsedData["bstatnNm"] as? String {
             terminusName = fetchedTerminusName
         }
         
-        if let fetchedDiretionInfo = parsedData["trainLineNm"] {
+        if let fetchedDiretionInfo = parsedData["trainLineNm"] as? String {
             directionInfo = fetchedDiretionInfo
             if fetchedDiretionInfo.contains("막차") {
                 lastFlag = 1
             }
         }
         
-        if let fetchedCurStationName = parsedData["arvlMsg3"] {
+        if let fetchedCurStationName = parsedData["arvlMsg3"] as? String {
             curStationName = fetchedCurStationName
         }
         
-        if let fetchedArrivalMsg = parsedData["arvlMsg2"] {
+        if let fetchedArrivalMsg = parsedData["arvlMsg2"] as? String {
             arrivalMsg = fetchedArrivalMsg
         }
         
-        if let fetchedStationId = parsedData["statnId"], let fetchedStationIdInt = Int(fetchedStationId) {
+        if let fetchedStationId = parsedData["statnId"] as? String, let fetchedStationIdInt = Int(fetchedStationId) {
             stationId = fetchedStationIdInt
         }
         
-        if let fetchedLineId = parsedData["subwayId"], let fetchedLineIdInt = Int(fetchedLineId) {
+        if let fetchedLineId = parsedData["subwayId"] as? String, let fetchedLineIdInt = Int(fetchedLineId) {
             lineId = fetchedLineIdInt
         }
         
-        if let fetchedUpdownFlag = parsedData["updnLine"] {
+        if let fetchedUpdownFlag = parsedData["updnLine"] as? String {
             updownMsg = fetchedUpdownFlag
             if fetchedUpdownFlag == "하행" || fetchedUpdownFlag == "내선" {
                 updownFlag = 1
             }
         }
         
-        if let fetchedTerminusId = parsedData["bstatnId"], let fetchedTerminusIdInt = Int(fetchedTerminusId) {
+        if let fetchedTerminusId = parsedData["bstatnId"] as? String, let fetchedTerminusIdInt = Int(fetchedTerminusId) {
             terminusId = fetchedTerminusIdInt
         }
         
-        if let fetchedExpressFlag = parsedData["btrainSttus"] {
+        if let fetchedExpressFlag = parsedData["btrainSttus"] as? String {
             if fetchedExpressFlag == "급행" {
                 expressFlag = 1
             }
         }
         
-        if let fetchedTrainId = parsedData["btrainNo"], let fetchedTrainIdInt = Int(fetchedTrainId) {
+        if let fetchedTrainId = parsedData["btrainNo"] as? String, let fetchedTrainIdInt = Int(fetchedTrainId) {
             trainId = fetchedTrainIdInt
         }
         
-        if let fetchedCurStationId = parsedData["bstatnId"], let fetchedCurStationIdInt = Int(fetchedCurStationId) {
+        if let fetchedCurStationId = parsedData["bstatnId"] as? String, let fetchedCurStationIdInt = Int(fetchedCurStationId) {
             curStationId = fetchedCurStationIdInt
         }
         
-        if let fetchedArrivalCode = parsedData["arvlCd"], let fetchedArrivalCodeInt = Int(fetchedArrivalCode) {
+        if let fetchedArrivalCode = parsedData["arvlCd"] as? String, let fetchedArrivalCodeInt = Int(fetchedArrivalCode) {
             arrivalCode = fetchedArrivalCodeInt
         }
         
-        if let fetchedLeftTime = parsedData["barvlDt"], let fetchedLeftTimeInt = Int(fetchedLeftTime) {
+        if let fetchedLeftTime = parsedData["barvlDt"] as? String, let fetchedLeftTimeInt = Int(fetchedLeftTime) {
             leftTime = fetchedLeftTimeInt
         }
         
-        if let fetchedLeftTimeMsg = parsedData["arvlMsg2"] {
+        if let fetchedLeftTimeMsg = parsedData["arvlMsg2"] as? String {
             leftTimeMsg = fetchedLeftTimeMsg
         }
         
@@ -231,7 +223,6 @@ class RealtimeSubwayPositions {
         
         // updateRealtimeSubwayPosition() 뒤에 클로져를 붙이면 completionHandler가 호출 될 때 실행됨. 이 클로져 == completionHandler임
         self.getRealtimeSubwayPosition() { updatedPositionList in
-            self.positionList = updatedPositionList
             updatedPositionList.map {
                 print($0.subwayNm, $0.statnNm, $0.statnTnm,
                       $0.updnLine == 1 ? "내선순환" : "외선순환",
@@ -247,6 +238,7 @@ class RealtimeSubwayPositions {
         //URL에 한글이 포함되어 URL인코딩을 해야한다.
         guard let encodedUrl = (apistr + line).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
             print("why...")
+            
             return
         }
         
@@ -263,6 +255,7 @@ class RealtimeSubwayPositions {
             if error != nil {
                 print("HTTP Error")
                 print(error!)
+                
             } else {
                 if let usableData = data {
                     do {
@@ -285,6 +278,7 @@ class RealtimeSubwayPositions {
                         
                         // 핵심 : callback함수임.
                         // 여기서 직접적으로 return한다고 넘기고자 하는 object가 안넘어감 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+                        self.positionList = PositionListToUpdate
                         completionHandler(PositionListToUpdate)
                         
                     } catch let error as NSError {
@@ -295,6 +289,7 @@ class RealtimeSubwayPositions {
                         if let httpResponse = response as? HTTPURLResponse {
                             print(httpResponse.statusCode)
                         }
+                        
                         
                     }
                 }
@@ -310,7 +305,7 @@ class RealtimeSubwayNearestStations {
     var stationInfo : stations = stations.init()
     let convert : GeoConverter
     var currentPosition : GeographicPoint
-    let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/10/"
+    let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/20/"
     
     init(WGS_N : Double, WGS_E : Double) {
         convert = GeoConverter()
@@ -320,10 +315,6 @@ class RealtimeSubwayNearestStations {
             print(TmPosition)
         }
         
-        self.getNearestStations { updatedStationInfo in
-            print(updatedStationInfo)
-            self.stationInfo = updatedStationInfo
-        }
         return
     }
     
@@ -333,6 +324,7 @@ class RealtimeSubwayNearestStations {
         //URL에 한글이 포함되어 URL인코딩을 해야한다.
         guard let encodedUrl = (apistr + String(currentPosition.x) + "/" + String(currentPosition.y)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
             print("why...")
+            
             return
         }
         
@@ -349,6 +341,7 @@ class RealtimeSubwayNearestStations {
             if error != nil {
                 print("HTTP Error")
                 print(error!)
+                
             } else {
                 if let usableData = data {
                     do {
@@ -357,16 +350,18 @@ class RealtimeSubwayNearestStations {
                         
                         guard let json = jsonSerialized else {
                             print("parsed JSON referring error")
+                            
                             return
                         }
                         
                         guard let fetchedStationList = json["stationList"] as? [[String:Any]] else {
                             print("parsed JSON referring error")
+                            
                             return
                         }
                         
                         stationsToUpdate = stations(parsedData: fetchedStationList)
-                        
+                        self.stationInfo = stationsToUpdate
                         completionHandler(stationsToUpdate)
                         
                     } catch let error as NSError {
@@ -376,6 +371,7 @@ class RealtimeSubwayNearestStations {
                         //api 서버가 죽는 경우가 많아서 에러가 났을 때 HTTP 코드를 볼 수 있도록 하는 코드 추가
                         if let httpResponse = response as? HTTPURLResponse {
                             print(httpResponse.statusCode)
+                            
                         }
                         
                     }
@@ -388,8 +384,120 @@ class RealtimeSubwayNearestStations {
     }
 }
 
+class realtimeSubwayArrivalInfo {
+    var arrivalInfo : [String : [Int : [arrivalInfoEntry]]] = [:] // 예시 : arrivalInfo["2호선"][0 (외선)][0]
+    var stationName : String = "" // 예시 : 왕십리
+    var lineList : [(lineName : String, lineId : Int)] = []
+    let apistr = "http://swopenapi.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/realtimeStationArrival/0/30/"
+    
+    init(stationName : String, lineInfoList : [(lineName : String, lineId : Int)]) {
+        self.stationName = stationName
+        self.lineList = lineInfoList
+        return
+    }
+    
+    /* 실시간 지하철 위치정보 API에 HTTP request를 보내서 실시간 지하철 위치정보를 담은 object를 받아옴. */
+    func getArrivalInfo (completionHandler: @escaping (_ updatedStationInfo : [String : [Int : [arrivalInfoEntry]]]) -> Void) -> Void {
+        
+        //URL에 한글이 포함되어 URL인코딩을 해야한다.
+        guard let encodedUrl = (apistr + self.stationName).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
+            print("why...")
+            
+            return
+        }
+        
+        //request 객체를 만든다.
+        var request : URLRequest = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let session = URLSession.shared
+        
+        //request 객체로 URLSession dataTask 객체를 만든다. 실질적으로 HTTP request를 보낸다.
+        let task = session.dataTask(with: request) { (data, response, error) in
+            var arrivalInfoEntryListToUpdate : [arrivalInfoEntry] = []
+            var arrivalInfoToUpdate : [String : [Int : [arrivalInfoEntry]]] = [:]
+            
+            if error != nil {
+                print("HTTP Error")
+                print(error!)
+                
+            } else {
+                if let usableData = data {
+                    do {
+                        //parse responed JSON data
+                        let jsonSerialized = try JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
+                        
+                        guard let json = jsonSerialized else {
+                            print("parsed JSON referring error")
+                            
+                            return
+                        }
+                        
+                        guard let fetchedArrivalList = json["realtimeArrivalList"] as? [[String:Any]] else {
+                            print("parsed JSON referring error")
+                            
+                            return
+                        }
+                        
+                        for entry in fetchedArrivalList {
+                            arrivalInfoEntryListToUpdate.append(arrivalInfoEntry.init(parsedData: entry))
+                        }
+                        
+                        self.lineList.map({ (lineInfo) -> Void in
+                            if arrivalInfoToUpdate[lineInfo.lineName] == nil {
+                                arrivalInfoToUpdate[lineInfo.lineName] = [:]
+                            }
+                            arrivalInfoToUpdate[lineInfo.lineName]![0] = arrivalInfoEntryListToUpdate.filter({ $0.lineId == lineInfo.lineId && $0.updownFlag == 0 })
+                            arrivalInfoToUpdate[lineInfo.lineName]![1] = arrivalInfoEntryListToUpdate.filter({ $0.lineId == lineInfo.lineId && $0.updownFlag == 1 })
+                        })
+                        
+                        self.arrivalInfo = arrivalInfoToUpdate
+                        completionHandler(arrivalInfoToUpdate)
+                        
+                    } catch let error as NSError {
+                        print("JSON parsing error.")
+                        print(error.localizedDescription)
+                        
+                        //api 서버가 죽는 경우가 많아서 에러가 났을 때 HTTP 코드를 볼 수 있도록 하는 코드 추가
+                        if let httpResponse = response as? HTTPURLResponse {
+                            print(httpResponse.statusCode)
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        task.resume()
+    }
+}
 
-//test code 플레이 그라운드에서 실행해보면됨
-//let line2 = RealtimeSubwayPositions.init(whichLine : "2호선")
-//let nearlistStation = RealtimeSubwayNearestStations.init(WGS_N: 127.049337, WGS_E: 37.555932)
-//RunLoop.main.run()
+//사용 예시
+/*
+ /* RealtimeSubwayNearestStations 클래스에 현재 좌표를 입력하고 초기화를 한다. */
+ let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: 127.041773, WGS_E: 37.560591)
+ 
+ /* getNearestStations 메소드를 호출하여 completionhandler에 인자로 stations 구조체에 인접 지하철 정보를 받아온다 */
+ nearestStation.getNearestStations { (fetchedStations) in
+ /* nearestStation.stationInfo.stationOrderList[0] 에는 가장 우선순위가 높은 지하철역 이름이 저장돼있다
+ 해당 지하철역에 지나는 호선들과 호선들의 고유번호가 저장돼있는 정보를 가져온다.*/
+ if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[1]] {
+ // realtimeSubwayArrivalInfo 에 도착정보를 가져올 역이름과 해당 역에 지나는 호선 정보를 넘겨 초기화한다.
+ let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
+ // 초기화된 정보를 가지고 도착정보를 가져온다.
+ curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
+ fetchedArrivalInfo.keys.map({ (line) -> Void in
+ fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
+ if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
+ entrys.map({ (entry) -> Void in
+ print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
+ })
+ }
+ })
+ })
+ })
+ }
+ }
+ 
+ 
+ RunLoop.main.run()
+ */
