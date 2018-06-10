@@ -23,7 +23,7 @@ struct station: Decodable{
 }
 
 func getNearestStations (fetchLoc:CLLocationCoordinate2D?, completionHandler: @escaping (_ fetchedData : [[String:Any]]) -> Void) -> Void {
-    let apistr = "https://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/5/"
+    let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/5/"
     if let locVal = fetchLoc {
         guard let encodedUrl = (apistr + String(locVal.latitude) + "/" + String(locVal.longitude)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
             print("failed to encode URL")
@@ -53,8 +53,6 @@ func getNearestStations (fetchLoc:CLLocationCoordinate2D?, completionHandler: @e
                             print("parsed JSON referring error")
                             return
                         }
-                        print(fetchedStationList)
-                        print("calling completion Handler")
                         completionHandler(fetchedStationList)
                         
                     } catch let error as NSError {
@@ -131,7 +129,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         resultLabel.text = "lat = \(locValue.latitude)"
         resultLabel2.text = "lon = \(locValue.longitude)"
         getNearestStations(fetchLoc: locValue) { fetchedData in
-            print(fetchedData)
+            print(fetchedData[0])
         }
     }
     override func didReceiveMemoryWarning() {
