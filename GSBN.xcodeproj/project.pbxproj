@@ -17,20 +17,6 @@
 		39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */; };
 		39A34DDB20A43363004321D9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDA20A43363004321D9 /* DataType.swift */; };
 		CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6420CD17F8006A0756 /* LaunchImage.png */; };
-		CE5C8C7320CD1A40006A0756 /* main1024.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6620CD1A3D006A0756 /* main1024.png */; };
-		CE5C8C7420CD1A40006A0756 /* main167.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6720CD1A3E006A0756 /* main167.png */; };
-		CE5C8C7520CD1A40006A0756 /* main80.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6820CD1A3E006A0756 /* main80.png */; };
-		CE5C8C7620CD1A40006A0756 /* main152.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6920CD1A3E006A0756 /* main152.png */; };
-		CE5C8C7720CD1A40006A0756 /* main120.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6A20CD1A3E006A0756 /* main120.png */; };
-		CE5C8C7820CD1A40006A0756 /* main58.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6B20CD1A3E006A0756 /* main58.png */; };
-		CE5C8C7920CD1A40006A0756 /* main87.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6C20CD1A3F006A0756 /* main87.png */; };
-		CE5C8C7A20CD1A40006A0756 /* main180.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6D20CD1A3F006A0756 /* main180.png */; };
-		CE5C8C7B20CD1A40006A0756 /* main29.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6E20CD1A3F006A0756 /* main29.png */; };
-		CE5C8C7C20CD1A40006A0756 /* main60.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6F20CD1A3F006A0756 /* main60.png */; };
-		CE5C8C7D20CD1A40006A0756 /* main40.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C7020CD1A3F006A0756 /* main40.png */; };
-		CE5C8C7E20CD1A40006A0756 /* main76.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C7120CD1A40006A0756 /* main76.png */; };
-		CE5C8C7F20CD1A40006A0756 /* main20.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C7220CD1A40006A0756 /* main20.png */; };
-		CE5C8C8820D4D57F006A0756 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C8720D4D57F006A0756 /* line.png */; };
 		CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C8920D4D59A006A0756 /* Box.png */; };
 		CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */; };
 		CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */; };
@@ -306,26 +292,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5C8C7A20CD1A40006A0756 /* main180.png in Resources */,
-				CE5C8C7D20CD1A40006A0756 /* main40.png in Resources */,
 				CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */,
-				CE5C8C7320CD1A40006A0756 /* main1024.png in Resources */,
-				CE5C8C7B20CD1A40006A0756 /* main29.png in Resources */,
-				CE5C8C7920CD1A40006A0756 /* main87.png in Resources */,
-				CE5C8C7820CD1A40006A0756 /* main58.png in Resources */,
 				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
 				CE5C8CD420D4F939006A0756 /* Info.plist in Resources */,
-				CE5C8C7C20CD1A40006A0756 /* main60.png in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
-				CE5C8C7720CD1A40006A0756 /* main120.png in Resources */,
-				CE5C8C7620CD1A40006A0756 /* main152.png in Resources */,
-				CE5C8C8820D4D57F006A0756 /* line.png in Resources */,
-				CE5C8C7520CD1A40006A0756 /* main80.png in Resources */,
-				CE5C8C7420CD1A40006A0756 /* main167.png in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
-				CE5C8C7F20CD1A40006A0756 /* main20.png in Resources */,
 				39A34DB020A42F5B004321D9 /* Main.storyboard in Resources */,
-				CE5C8C7E20CD1A40006A0756 /* main76.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

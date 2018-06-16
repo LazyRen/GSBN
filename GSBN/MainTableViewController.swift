@@ -44,7 +44,6 @@ class MainTableViewController: UITableViewController {
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell") as! MainTableViewCell
         
-        
         cell.CurrentLineLbl.text = "6"
         cell.CurrentStationLbl.text = "동대문역사문화공원"
         cell.DepartTimeLbl.text = "6분 뒤 열차 도착"
