@@ -138,7 +138,7 @@ struct arrivalInfoEntry {
     var arrivalCode : Int = 0        //도착코드
     var arrivalMsg : String = ""     //도착코드 메세지
     var leftTime : Int = 0           //열차 도착 예정시간 (남은시간 초)
-    var leftTimeMsg : String = ""    //도착 예정시간 메세지
+    //var leftTimeMsg : String = ""    //도착 예정시간 메세지
     
     init(parsedData : [String : Any]) {
         if let fetchedStationName = parsedData["statnNm"] as? String {
@@ -207,10 +207,47 @@ struct arrivalInfoEntry {
             leftTime = fetchedLeftTimeInt
         }
         
-        if let fetchedLeftTimeMsg = parsedData["arvlMsg2"] as? String {
-            leftTimeMsg = fetchedLeftTimeMsg
+    }
+}
+
+var lineInfoDict = [
+    "1호선" : "1",
+    "2호선" : "2",
+    "3호선" : "3",
+    "4호선" : "4",
+    "5호선" : "5",
+    "6호선" : "6",
+    "7호선" : "7",
+    "8호선" : "8",
+    "9호선" : "9",
+    "경의중앙선" : "K",
+    "경춘선" : "G",
+    "공항철도" : "A",
+    "분당선" : "B",
+    "신분당선" : "S",
+    "인천1호선" : "I",
+    "수인선" : "SU"
+]
+
+struct stationOrderInfoEntry {
+    var line_num : String = ""
+    var stationId : Int = 0
+    var stationName : String = ""
+    var fr_code : String = ""
+    
+    init (f_stationInfo : [String:Any]) {
+        if  let f_line_num = f_stationInfo["line_num"] as? String,
+            let f_station_cd = f_stationInfo["station_cd"] as? String,
+            let f_station_nm = f_stationInfo["station_nm"] as? String,
+            let f_fr_code = f_stationInfo["fr_code"] as? String,
+            let f_station_cd_int = Int(f_station_cd)
+        {
+            self.line_num = f_line_num
+            self.stationId = f_station_cd_int
+            self.stationName = f_station_nm
+            self.fr_code = f_fr_code
         }
-        
+        return
     }
 }
 
@@ -472,3 +509,112 @@ class realtimeSubwayArrivalInfo {
         task.resume()
     }
 }
+
+func getStationOrderInfo() -> [stationOrderInfoEntry]
+{
+    let mainBundle = Bundle.main
+    let fileName: String = "station"
+    var stationOrderInfo : [stationOrderInfoEntry] = []
+    if let jsonPath = mainBundle.path(forResource: fileName, ofType: ".json", inDirectory: nil, forLocalization: nil), let jsonData = NSData(contentsOfFile: jsonPath)
+    {
+        do {
+            let jsonSerialized = try JSONSerialization.jsonObject(with: jsonData as Data, options : []) as? [String : Any]
+            
+            guard let json = jsonSerialized else {
+                print("parsed JSON referring error")
+                
+                return []
+            }
+            
+            guard let f_stationArray = json["DATA"] as? [[String:Any]] else {
+                print("parsed JSON referring error")
+                
+                return []
+            }
+            
+            for entry in f_stationArray {
+                stationOrderInfo.append(stationOrderInfoEntry(f_stationInfo: entry))
+            }
+            
+        } catch let error as NSError {
+            print("JSON parsing error.")
+            print(error.localizedDescription)
+            
+            
+        }
+        
+        
+        
+    } else {
+        print("노 file")
+    }
+    
+    return stationOrderInfo
+}
+
+func getSideStation(stationName : String, lineName : String, updownFlag : Int) -> [String] {
+    guard let whichLine = lineInfoDict[lineName] else {
+        print("no %s line", lineName)
+        return []
+    }
+    let stationOrderInfo = getStationOrderInfo() // 매번 JSON 파싱을 할 필요 없으므로 추후에 초기화 함수 만들어서 한번만 실행될 수 있도록 수정해야함
+    let f_curStationOrderInfo = stationOrderInfo.filter({$0.line_num == whichLine})
+    var curStationOrderInfo : [stationOrderInfoEntry] = []
+    if (updownFlag == 0) {
+        curStationOrderInfo = f_curStationOrderInfo.sorted(by: { $0.fr_code.compare($1.fr_code, options : .numeric) == .orderedAscending})
+    } else if (updownFlag == 1) {
+        curStationOrderInfo = f_curStationOrderInfo.sorted(by: { $0.fr_code.compare($1.fr_code, options : .numeric) == .orderedDescending})
+    } else {
+        print("invalid updownFlag")
+        return []
+    }
+    
+    
+    
+    guard let index = curStationOrderInfo.index(where : { $0.stationName == stationName }) else {
+        print("has no station Info")
+        return []
+    }
+    
+    if (index == 0) {
+        return ["", curStationOrderInfo[1].stationName]
+    } else if (index == (curStationOrderInfo.count - 1)){
+        return [curStationOrderInfo[curStationOrderInfo.count - 2].stationName, ""]
+    }
+    
+    return [curStationOrderInfo[index - 1].stationName, curStationOrderInfo[index + 1].stationName]
+    
+}
+
+// 사용 예시
+/*
+/* RealtimeSubwayNearestStations 클래스에 현재 좌표를 입력하고 초기화를 한다. */
+let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: 127.041773, WGS_E: 37.560591)
+
+/* getNearestStations 메소드를 호출하여 completionhandler에 인자로 stations 구조체에 인접 지하철 정보를 받아온다 */
+nearestStation.getNearestStations { (fetchedStations) in
+    /* nearestStation.stationInfo.stationOrderList[0] 에는 가장 우선순위가 높은 지하철역 이름이 저장돼있다
+     해당 지하철역에 지나는 호선들과 호선들의 고유번호가 저장돼있는 정보를 가져온다.*/
+    if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[1]] {
+        // realtimeSubwayArrivalInfo 에 도착정보를 가져올 역이름과 해당 역에 지나는 호선 정보를 넘겨 초기화한다.
+        let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
+        // 초기화된 정보를 가지고 도착정보를 가져온다.
+        curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
+            fetchedArrivalInfo.keys.map({ (line) -> Void in
+                fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
+                    if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
+                        entrys.map({ (entry) -> Void in
+                            print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.arrivalMsg, String(entry.leftTime) + "초 후 도착")
+                        })
+                    }
+                })
+            })
+        })
+    }
+}
+
+// 양옆 지하철 예시
+print(getSideStation(stationName: "춘천", lineName: "경춘선", updownFlag: 1))
+
+RunLoop.main.run()
+*/
