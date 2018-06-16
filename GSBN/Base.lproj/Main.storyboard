@@ -1,73 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHy-Lo-Xho">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Main Table View Controller-->
+        <scene sceneID="Rht-fy-QgN">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="612" y="32"/>
-        </scene>
-        <!--Next Train Table View Controller-->
-        <scene sceneID="cUX-fl-UNR">
-            <objects>
-                <tableViewController id="xIj-h7-azd" customClass="NextTrainTableViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="O6G-xb-gET">
+                <tableViewController id="bHy-Lo-Xho" customClass="MainTableViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hgY-dX-1hm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="trainCell" textLabel="1UQ-oJ-Xr4" detailTextLabel="ltB-4g-CJ3" style="IBUITableViewCellStyleSubtitle" id="RBV-no-Lht">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" rowHeight="333" id="dsA-YZ-9NX" customClass="MainTableViewCell" customModule="GSBN" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="333"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RBV-no-Lht" id="61Q-pO-cgQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dsA-YZ-9NX" id="Pcw-fi-9YW">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1UQ-oJ-Xr4">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~호선 동대문역사문화공원역 왕십리 방면" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="T3v-Dz-tLQ">
+                                            <rect key="frame" x="50" y="10" width="275" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ltB-4g-CJ3">
-                                            <rect key="frame" x="16" y="25.5" width="33" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동대문역사문화공원 역 도착" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jzk-UM-bYg">
+                                            <rect key="frame" x="181" y="91" width="163" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~분 뒤 출발하세요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="eUi-Jr-IEw">
+                                            <rect key="frame" x="181" y="157.5" width="163" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~분 뒤 열차 도착" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="NWy-8b-RA7">
+                                            <rect key="frame" x="181" y="224" width="163" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="cxh-s1-x7M">
+                                            <rect key="frame" x="41" y="41" width="20" height="270"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="Uid-pw-xCM"/>
+                                                <constraint firstAttribute="height" constant="270" id="vZW-vm-n6Y"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동대문역사문화공원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7qB-1H-zsY">
+                                            <rect key="frame" x="81" y="83" width="80" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="jZF-sk-pUa"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동대문역사문화공원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hit-X6-nIY">
+                                            <rect key="frame" x="81" y="166" width="80" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="GnY-2o-6dN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동대문역사문화공원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IoR-c9-S7C">
+                                            <rect key="frame" x="81" y="247" width="80" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="5kT-ap-AYs"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsP-51-EBf">
+                                            <rect key="frame" x="46" y="85" width="11" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="highlightedColor" red="0.78675822169999998" green="0.80577827589999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Box.png" translatesAutoresizingMaskIntoConstraints="NO" id="J38-DQ-dTy" customClass="UINextStationLabel">
+                                            <rect key="frame" x="10" y="14" width="355" height="312.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="312.5" id="jqT-Nb-xcV"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hit-X6-nIY" firstAttribute="top" secondItem="7qB-1H-zsY" secondAttribute="bottom" constant="62" id="0dH-F1-noZ"/>
+                                        <constraint firstItem="cxh-s1-x7M" firstAttribute="top" secondItem="T3v-Dz-tLQ" secondAttribute="bottom" constant="10" id="4Ls-cb-BHl"/>
+                                        <constraint firstItem="GsP-51-EBf" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leadingMargin" constant="30" id="7Rz-Vm-Qwn"/>
+                                        <constraint firstItem="J38-DQ-dTy" firstAttribute="top" secondItem="Pcw-fi-9YW" secondAttribute="top" constant="15" id="C3R-ea-awM"/>
+                                        <constraint firstItem="jzk-UM-bYg" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leadingMargin" constant="165" id="DQO-T1-pF7"/>
+                                        <constraint firstItem="cxh-s1-x7M" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leadingMargin" constant="25" id="Dcs-JZ-Oxs"/>
+                                        <constraint firstItem="7qB-1H-zsY" firstAttribute="top" secondItem="T3v-Dz-tLQ" secondAttribute="bottom" constant="52" id="FLd-EP-epv"/>
+                                        <constraint firstItem="T3v-Dz-tLQ" firstAttribute="top" secondItem="Pcw-fi-9YW" secondAttribute="top" constant="10" id="MFh-r1-wkN"/>
+                                        <constraint firstAttribute="bottom" secondItem="J38-DQ-dTy" secondAttribute="bottom" constant="5" id="Rea-qL-UBs"/>
+                                        <constraint firstItem="jzk-UM-bYg" firstAttribute="top" secondItem="T3v-Dz-tLQ" secondAttribute="bottom" constant="60" id="Uzi-WR-FoD"/>
+                                        <constraint firstItem="T3v-Dz-tLQ" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leading" constant="50" id="YWC-zD-64s"/>
+                                        <constraint firstItem="NWy-8b-RA7" firstAttribute="top" secondItem="eUi-Jr-IEw" secondAttribute="bottom" constant="40" id="Zbl-yF-vEL"/>
+                                        <constraint firstItem="NWy-8b-RA7" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leadingMargin" constant="165" id="a4s-hM-htW"/>
+                                        <constraint firstItem="IoR-c9-S7C" firstAttribute="top" secondItem="hit-X6-nIY" secondAttribute="bottom" constant="60" id="byE-lR-eYB"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="NWy-8b-RA7" secondAttribute="trailing" constant="15" id="bzC-9o-LUk"/>
+                                        <constraint firstItem="J38-DQ-dTy" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leading" constant="10" id="cXk-WW-osN"/>
+                                        <constraint firstItem="IoR-c9-S7C" firstAttribute="leading" secondItem="cxh-s1-x7M" secondAttribute="trailing" constant="20" id="dOn-0n-2vi"/>
+                                        <constraint firstAttribute="trailing" secondItem="T3v-Dz-tLQ" secondAttribute="trailing" constant="50" id="e6Y-7R-P05"/>
+                                        <constraint firstItem="eUi-Jr-IEw" firstAttribute="leading" secondItem="Pcw-fi-9YW" secondAttribute="leadingMargin" constant="165" id="gzl-90-7S5"/>
+                                        <constraint firstItem="T3v-Dz-tLQ" firstAttribute="centerX" secondItem="Pcw-fi-9YW" secondAttribute="centerX" id="hsh-cr-adW"/>
+                                        <constraint firstAttribute="trailing" secondItem="J38-DQ-dTy" secondAttribute="trailing" constant="10" id="nlZ-lN-Poy"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jzk-UM-bYg" secondAttribute="trailing" constant="15" id="o4M-15-FeY"/>
+                                        <constraint firstItem="eUi-Jr-IEw" firstAttribute="top" secondItem="jzk-UM-bYg" secondAttribute="bottom" constant="40" id="o65-eG-959"/>
+                                        <constraint firstItem="hit-X6-nIY" firstAttribute="leading" secondItem="cxh-s1-x7M" secondAttribute="trailing" constant="20" id="oPq-HM-VkR"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="eUi-Jr-IEw" secondAttribute="trailing" constant="15" id="taR-mD-jrk"/>
+                                        <constraint firstItem="7qB-1H-zsY" firstAttribute="leading" secondItem="cxh-s1-x7M" secondAttribute="trailing" constant="20" id="vKN-Dn-SBR"/>
+                                        <constraint firstItem="GsP-51-EBf" firstAttribute="top" secondItem="T3v-Dz-tLQ" secondAttribute="bottom" constant="54" id="ycB-5k-dqy"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="BeforeStationLbl" destination="7qB-1H-zsY" id="3uE-Ik-uN5"/>
+                                    <outlet property="CurrentLineLbl" destination="GsP-51-EBf" id="Mnh-7u-sDc"/>
+                                    <outlet property="CurrentStationLbl" destination="hit-X6-nIY" id="II3-RU-dSr"/>
+                                    <outlet property="DepartTimeLbl" destination="eUi-Jr-IEw" id="uaU-5y-fCe"/>
+                                    <outlet property="InformationLbl" destination="T3v-Dz-tLQ" id="2DD-oh-g4k"/>
+                                    <outlet property="NextStationLbl" destination="IoR-c9-S7C" id="gtd-gs-Ybn"/>
+                                    <outlet property="TrainArrivalTimeLbl" destination="NWy-8b-RA7" id="mP1-kl-Vg6"/>
+                                    <outlet property="TrainStatusLbl" destination="jzk-UM-bYg" id="TYe-zF-OmQ"/>
+                                    <outlet property="cellView" destination="Pcw-fi-9YW" id="HX3-is-ggN"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="xIj-h7-azd" id="yCb-95-YhR"/>
-                            <outlet property="delegate" destination="xIj-h7-azd" id="9iG-tY-Hyw"/>
+                            <outlet property="dataSource" destination="bHy-Lo-Xho" id="2PQ-Qh-SdM"/>
+                            <outlet property="delegate" destination="bHy-Lo-Xho" id="VRk-ro-j5N"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f2v-pT-QyG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QHd-iY-a1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1404" y="32"/>
+            <point key="canvasLocation" x="1351" y="32"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Box.png" width="1577" height="1200"/>
+        <image name="Line" width="511" height="1371"/>
+    </resources>
 </document>

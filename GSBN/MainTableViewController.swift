@@ -1,18 +1,21 @@
 //
-//  NextTrainTableViewController.swift
+//  MainTableViewController.swift
 //  GSBN
 //
-//  Created by Lazy Ren on 10/05/2018.
-//  Copyright © 2018 Lazy Ren. All rights reserved.
+//  Created by User on 2018. 6. 16..
+//  Copyright © 2018년 Lazy Ren. All rights reserved.
 //
 
 import UIKit
 
-class NextTrainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController {
+
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,20 +37,36 @@ class NextTrainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return nextTrains.trains.count
+        return 1
     }
-
-
+    
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell") as! MainTableViewCell
+        
+        
+        cell.CurrentLineLbl.text = "6"
+        cell.CurrentStationLbl.text = "동대문역사문화공원"
+        cell.DepartTimeLbl.text = "6분 뒤 열차 도착"
+        cell.InformationLbl.text = "6호선 합정역 월드컵경기장 방면"
+        cell.NextStationLbl.text = "디지털미디어시티"
+        cell.CurrentStationLbl.text = "월드컵경기장"
+        cell.BeforeStationLbl.text = "마포구청"
+        cell.TrainStatusLbl.text = "마포구청역 출발"
+        
+        
+        return cell
+        
+    }
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-      /*  let train = nextTrains.trains[indexPath.row]
-        cell.textLabel!.text = train.name + " : " + train.currentStation
-        cell.detailTextLabel!.text = "도착예정시간: " + train.estimatedArrival
-        */
+
         return cell
     }
+    */
 
     /*
     // Override to support conditional editing of the table view.
