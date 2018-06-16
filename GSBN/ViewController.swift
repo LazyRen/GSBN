@@ -138,58 +138,106 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         var currentPosition : GeographicPoint = GeographicPoint(x: locValue.longitude, y: locValue.latitude)
         if let TmPosition = convert.convert(sourceType: .WGS_84, destinationType: .TM, geoPoint: currentPosition) {
             currentPosition = TmPosition
-            print(TmPosition)
+//            print(TmPosition)
         }
         else {
             print("failed to convert")
         }
         
         print("position converted: \(currentPosition)")
-        getNearestStations(fetchLoc: currentPosition) { fetchedData in
-            print(fetchedData[0])
-            if let tmp = fetchedData[0]["subwayXcnts"] as? String {
-                if let x = Double(tmp) {
-                    self.nearestStationX = Double(x)
+        let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: locValue.longitude, WGS_E: locValue.latitude)
+        nearestStation.getNearestStations { (fetchedStations) in
+            if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[0]] {
+                self.nearestStationX = stationInfo[0].stationX
+                self.nearestStationY = stationInfo[0].stationY
+                let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
+                curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
+                    fetchedArrivalInfo.keys.map({ (line) -> Void in
+                        fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
+                            if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
+                                entrys.map({ (entry) -> Void in
+                                    //print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
+                                    print(entry)
+                                })
+                            }
+                        })
+                    })
+                })
+                var stationPosition : GeographicPoint = GeographicPoint(x: self.nearestStationX, y: self.nearestStationY)
+                if let TmPosition = convert.convert(sourceType: .TM, destinationType: .WGS_84, geoPoint: stationPosition) {
+                    stationPosition = TmPosition
+                    //                print(TmPosition)
                 }
                 
-            }
-            if let tmp = fetchedData[0]["subwayYcnts"] as? String {
-                if let y = Double(tmp) {
-                    self.nearestStationY = Double(y)
-                }
-            }
-//            print("\n")
-//            print("\(self.nearestStationX), \(self.nearestStationY)")
-//            print("\n")
-            
-            var stationPosition : GeographicPoint = GeographicPoint(x: self.nearestStationX, y: self.nearestStationY)
-            if let TmPosition = convert.convert(sourceType: .TM, destinationType: .WGS_84, geoPoint: stationPosition) {
-                stationPosition = TmPosition
-                print(TmPosition)
-            }
-            
-            // Get destination position
-            let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
-            let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
-            let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-            
-            // Create request
-            let request = MKDirectionsRequest()
-            request.source = sourceMapItem
-            request.destination = destinationMapItem
-            request.transportType = MKDirectionsTransportType.walking
-            request.requestsAlternateRoutes = false
-            let directions = MKDirections(request: request)
-            directions.calculate { response, error in
-                if let route = response?.routes.first {
-                    print(location)
-                    print(destinationCoordinates)
-                    print("Distance: \(route.distance), ETA: \(route.expectedTravelTime)")
-                } else {
-                    print("Error!")
+                // Get destination position
+                let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
+                let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
+                let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+                
+                // Create request
+                let request = MKDirectionsRequest()
+                request.source = sourceMapItem
+                request.destination = destinationMapItem
+                request.transportType = MKDirectionsTransportType.walking
+                request.requestsAlternateRoutes = false
+                let directions = MKDirections(request: request)
+                directions.calculate { response, error in
+                    if let route = response?.routes.first {
+                        //                    print(location)
+                        //                    print(destinationCoordinates)
+                        print("Distance: \(route.distance), ETA: \(route.expectedTravelTime)")
+                    } else {
+                        print("Error!")
+                    }
                 }
             }
         }
+//        getNearestStations(fetchLoc: currentPosition) { fetchedData in
+//            print(fetchedData)
+//            if let tmp = fetchedData[0]["subwayXcnts"] as? String {
+//                if let x = Double(tmp) {
+//                    self.nearestStationX = Double(x)
+//                }
+//
+//            }
+//            if let tmp = fetchedData[0]["subwayYcnts"] as? String {
+//                if let y = Double(tmp) {
+//                    self.nearestStationY = Double(y)
+//                }
+//            }
+////            print(fetchedData[0]["statnNm"])
+////            print("\n")
+////            print("\(self.nearestStationX), \(self.nearestStationY)")
+////            print("\n")
+//
+//            var stationPosition : GeographicPoint = GeographicPoint(x: self.nearestStationX, y: self.nearestStationY)
+//            if let TmPosition = convert.convert(sourceType: .TM, destinationType: .WGS_84, geoPoint: stationPosition) {
+//                stationPosition = TmPosition
+////                print(TmPosition)
+//            }
+//            
+//            // Get destination position
+//            let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
+//            let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
+//            let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+//
+//            // Create request
+//            let request = MKDirectionsRequest()
+//            request.source = sourceMapItem
+//            request.destination = destinationMapItem
+//            request.transportType = MKDirectionsTransportType.walking
+//            request.requestsAlternateRoutes = false
+//            let directions = MKDirections(request: request)
+//            directions.calculate { response, error in
+//                if let route = response?.routes.first {
+////                    print(location)
+////                    print(destinationCoordinates)
+//                    print("Distance: \(route.distance), ETA: \(route.expectedTravelTime)")
+//                } else {
+//                    print("Error!")
+//                }
+//            }
+//        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

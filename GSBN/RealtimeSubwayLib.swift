@@ -77,8 +77,7 @@ struct realtimeSubwayPositionListEntry {
 struct stations {
     var lineSet : Set<String> = []
     var stationOrderList : [String] = []
-    var stationList : [String : [(lineName : String, lineId : Int)]] = [:]
-    
+    var stationList : [String : [(lineName : String, lineId : Int, stationX : Double, stationY : Double)]] = [:]
     init (parsedData : [[String:Any]]) {
         lineSet = []
         stationList = [:]
@@ -87,13 +86,17 @@ struct stations {
             if let stationName = station["statnNm"] as? String,
                 let lineName = station["subwayNm"] as? String,
                 let fetchedlineId = station["subwayId"] as? String,
-                let lineId = Int(fetchedlineId) {
+                let lineId = Int(fetchedlineId),
+                let fetchedX = station["subwayXcnts"] as? String,
+                let fetchedY = station["subwayYcnts"] as? String,
+                let x = Double(fetchedX),
+                let y = Double(fetchedY) {
                 
                 if stationList[stationName] == nil {
                     stationList[stationName] = []
                 }
                 
-                stationList[stationName]?.append((lineName, lineId))
+                stationList[stationName]?.append((lineName, lineId, x, y))
                 
                 if !stationOrderList.contains(stationName) {
                     stationOrderList.append(stationName)
@@ -251,9 +254,9 @@ class RealtimeSubwayPositions {
             
             var PositionListToUpdate : [realtimeSubwayPositionListEntry] = []
             
-            if error != nil {
+            if let tmperr = error {
                 print("HTTP Error")
-                print(error!)
+                print(tmperr)
                 
             } else {
                 if let usableData = data {
@@ -386,10 +389,10 @@ class RealtimeSubwayNearestStations {
 class realtimeSubwayArrivalInfo {
     var arrivalInfo : [String : [Int : [arrivalInfoEntry]]] = [:] // 예시 : arrivalInfo["2호선"][0 (외선)][0]
     var stationName : String = "" // 예시 : 왕십리
-    var lineList : [(lineName : String, lineId : Int)] = []
+    var lineList : [(lineName : String, lineId : Int, stationX : Double, stationY : Double)] = []
     let apistr = "http://swopenapi.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/realtimeStationArrival/0/30/"
     
-    init(stationName : String, lineInfoList : [(lineName : String, lineId : Int)]) {
+    init(stationName : String, lineInfoList : [(lineName : String, lineId : Int, stationX : Double, stationY : Double)]) {
         self.stationName = stationName
         self.lineList = lineInfoList
         return
@@ -469,34 +472,3 @@ class realtimeSubwayArrivalInfo {
         task.resume()
     }
 }
-
-//사용 예시
-/*
- /* RealtimeSubwayNearestStations 클래스에 현재 좌표를 입력하고 초기화를 한다. */
- let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: 127.041773, WGS_E: 37.560591)
- 
- /* getNearestStations 메소드를 호출하여 completionhandler에 인자로 stations 구조체에 인접 지하철 정보를 받아온다 */
- nearestStation.getNearestStations { (fetchedStations) in
- /* nearestStation.stationInfo.stationOrderList[0] 에는 가장 우선순위가 높은 지하철역 이름이 저장돼있다
- 해당 지하철역에 지나는 호선들과 호선들의 고유번호가 저장돼있는 정보를 가져온다.*/
- if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[1]] {
- // realtimeSubwayArrivalInfo 에 도착정보를 가져올 역이름과 해당 역에 지나는 호선 정보를 넘겨 초기화한다.
- let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
- // 초기화된 정보를 가지고 도착정보를 가져온다.
- curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
- fetchedArrivalInfo.keys.map({ (line) -> Void in
- fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
- if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
- entrys.map({ (entry) -> Void in
- print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
- })
- }
- })
- })
- })
- }
- }
- 
- 
- RunLoop.main.run()
- */
