@@ -208,6 +208,47 @@ struct arrivalInfoEntry {
     }
 }
 
+var lineInfoDict = [
+    "1호선" : "1",
+    "2호선" : "2",
+    "3호선" : "3",
+    "4호선" : "4",
+    "5호선" : "5",
+    "6호선" : "6",
+    "7호선" : "7",
+    "8호선" : "8",
+    "9호선" : "9",
+    "경의중앙선" : "K",
+    "경춘선" : "G",
+    "공항철도" : "A",
+    "분당선" : "B",
+    "신분당선" : "S",
+    "인천1호선" : "I",
+    "수인선" : "SU"
+]
+
+struct stationOrderInfoEntry {
+    var line_num : String = ""
+    var stationId : Int = 0
+    var stationName : String = ""
+    var fr_code : String = ""
+    
+    init (f_stationInfo : [String:Any]) {
+        if  let f_line_num = f_stationInfo["line_num"] as? String,
+            let f_station_cd = f_stationInfo["station_cd"] as? String,
+            let f_station_nm = f_stationInfo["station_nm"] as? String,
+            let f_fr_code = f_stationInfo["fr_code"] as? String,
+            let f_station_cd_int = Int(f_station_cd)
+        {
+            self.line_num = f_line_num
+            self.stationId = f_station_cd_int
+            self.stationName = f_station_nm
+            self.fr_code = f_fr_code
+        }
+        return
+    }
+}
+
 
 class RealtimeSubwayPositions {
     var positionList : [realtimeSubwayPositionListEntry] = []
@@ -467,7 +508,83 @@ class realtimeSubwayArrivalInfo {
     }
 }
 
-//사용 예시
+func getStationOrderInfo() -> [stationOrderInfoEntry]
+{
+    let mainBundle = Bundle.main
+    let fileName: String = "station"
+    var stationOrderInfo : [stationOrderInfoEntry] = []
+    if let jsonPath = mainBundle.path(forResource: fileName, ofType: ".json", inDirectory: nil, forLocalization: nil), let jsonData = NSData(contentsOfFile: jsonPath)
+    {
+        do {
+            let jsonSerialized = try JSONSerialization.jsonObject(with: jsonData as Data, options : []) as? [String : Any]
+            
+            guard let json = jsonSerialized else {
+                print("parsed JSON referring error")
+                
+                return []
+            }
+            
+            guard let f_stationArray = json["DATA"] as? [[String:Any]] else {
+                print("parsed JSON referring error")
+                
+                return []
+            }
+            
+            for entry in f_stationArray {
+                stationOrderInfo.append(stationOrderInfoEntry(f_stationInfo: entry))
+            }
+            
+        } catch let error as NSError {
+            print("JSON parsing error.")
+            print(error.localizedDescription)
+            
+            
+        }
+        
+        
+        
+    } else {
+        print("노 file")
+    }
+    
+    return stationOrderInfo
+}
+
+func getSideStation(stationName : String, lineName : String, updownFlag : Int) -> [String] {
+    guard let whichLine = lineInfoDict[lineName] else {
+        print("no %s line", lineName)
+        return []
+    }
+    let stationOrderInfo = getStationOrderInfo() // 매번 JSON 파싱을 할 필요 없으므로 추후에 초기화 함수 만들어서 한번만 실행될 수 있도록 수정해야함
+    let f_curStationOrderInfo = stationOrderInfo.filter({$0.line_num == whichLine})
+    var curStationOrderInfo : [stationOrderInfoEntry] = []
+    if (updownFlag == 0) {
+        curStationOrderInfo = f_curStationOrderInfo.sorted(by: { $0.fr_code.compare($1.fr_code, options : .numeric) == .orderedAscending})
+    } else if (updownFlag == 1) {
+        curStationOrderInfo = f_curStationOrderInfo.sorted(by: { $0.fr_code.compare($1.fr_code, options : .numeric) == .orderedDescending})
+    } else {
+        print("invalid updownFlag")
+        return []
+    }
+    
+    
+    
+    guard let index = curStationOrderInfo.index(where : { $0.stationName == stationName }) else {
+        print("has no station Info")
+        return []
+    }
+    
+    if (index == 0) {
+        return ["", curStationOrderInfo[1].stationName]
+    } else if (index == (curStationOrderInfo.count - 1)){
+        return [curStationOrderInfo[curStationOrderInfo.count - 2].stationName, ""]
+    }
+    
+    return [curStationOrderInfo[index - 1].stationName, curStationOrderInfo[index + 1].stationName]
+    
+}
+
+// 사용 예시
 /*
 /* RealtimeSubwayNearestStations 클래스에 현재 좌표를 입력하고 초기화를 한다. */
 let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: 127.041773, WGS_E: 37.560591)
@@ -494,6 +611,9 @@ nearestStation.getNearestStations { (fetchedStations) in
     }
 }
 
+// 양옆 지하철 예시
+print(getSideStation(stationName: "춘천", lineName: "경춘선", updownFlag: 1))
 
 RunLoop.main.run()
 */
+
