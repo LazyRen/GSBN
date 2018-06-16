@@ -10,23 +10,27 @@ import UIKit
 import CoreLocation
 import MapKit
 
+<<<<<<< HEAD
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     let locationManager = CLLocationManager()
     var nearestStationX: Double = 0.0
     var nearestStationY: Double = 0.0
+    let Train = ["동대문역사문화공원", "왕십리", "상왕십리"]
+
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var myMapKitView: MKMapView!
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var resultLabel2: UILabel!
     @IBOutlet weak var testLabel: UILabel!
-    
-    
+
     override func viewDidLoad() {
+
         super.viewDidLoad()
-        
+
         myMapKitView.delegate = self
         myMapKitView.showsPointsOfInterest = true
         myMapKitView.showsUserLocation = true
-        
+
         func enableLocationServices() {
             locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
@@ -38,7 +42,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 break;
             }
         }
-        
+
         enableLocationServices()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
@@ -50,7 +54,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
         myMapKitView.setRegion(coordinateRegion, animated: true)
-        
+
 //        locationManager.stopUpdatingLocation()
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         resultLabel.text = "lat = \(locValue.latitude)"
@@ -64,7 +68,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         else {
             print("failed to convert")
         }
-        
+
         print("position converted: \(currentPosition)")
         let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: locValue.longitude, WGS_E: locValue.latitude)
         nearestStation.getNearestStations { (fetchedStations) in
@@ -89,12 +93,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     stationPosition = TmPosition
                     //                print(TmPosition)
                 }
-                
+
                 // Get destination position
                 let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
                 let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-                
+
                 // Create request
                 let request = MKDirectionsRequest()
                 request.source = sourceMapItem
@@ -117,5 +121,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell") as! MainTableViewCell
+
+        cell.CurrentLineLbl.text = "6"
+        cell.CurrentStationLbl.text = "동대문역사문화공원"
+        cell.DepartTimeLbl.text = "6분 뒤 열차 도착"
+        cell.InformationLbl.text = "6호선 합정역 월드컵경기장 방면"
+        cell.NextStationLbl.text = "디지털미디어시티"
+        cell.CurrentStationLbl.text = "월드컵경기장"
+        cell.BeforeStationLbl.text = "마포구청"
+        cell.TrainStatusLbl.text = "마포구청역 출발"
+
+        return cell
     }
 }

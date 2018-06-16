@@ -22,10 +22,13 @@
 		39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */; };
 		39AC641720B3550600D31F84 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AC641620B3550600D31F84 /* CoreLocation.framework */; };
 		CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6420CD17F8006A0756 /* LaunchImage.png */; };
+<<<<<<< HEAD
+=======
 		CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C8920D4D59A006A0756 /* Box.png */; };
 		CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */; };
 		CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */; };
 		CE5C8CD420D4F939006A0756 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8CD320D4F939006A0756 /* Info.plist */; };
+>>>>>>> launch
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,8 +153,11 @@
 				39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */,
 				39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
+<<<<<<< HEAD
 				398A590920D4C8C5004F547C /* RealtimeSubwayLib.swift */,
+=======
 				CE5C8CD320D4F939006A0756 /* Info.plist */,
+>>>>>>> launch
 				39A34DAC20A42F5B004321D9 /* ViewController.swift */,
 				391B6B2720CD1E3C00FBEBE0 /* GeoConverter.swift */,
 				39A34DAE20A42F5B004321D9 /* Main.storyboard */,
@@ -316,15 +322,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
 				398DF3E920CCFA72004E14E7 /* stations.json in Resources */,
+=======
 				CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */,
 				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
 				CE5C8CD420D4F939006A0756 /* Info.plist in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
+>>>>>>> launch
 				39A34DB020A42F5B004321D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
