@@ -7,10 +7,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main Table View Controller-->
+        <!--View Controller-->
         <scene sceneID="Rht-fy-QgN">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
@@ -58,13 +59,11 @@
             </objects>
             <point key="canvasLocation" x="400.80000000000001" y="50.824587706146929"/>
         </scene>
-        <!--Next Train Table View Controller-->
+        <!--Main Table View Controller-->
         <scene sceneID="cUX-fl-UNR">
             <objects>
-                <tableViewController id="xIj-h7-azd" customClass="NextTrainTableViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="xIj-h7-azd" customClass="MainTableViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="O6G-xb-gET">
-                <tableViewController id="bHy-Lo-Xho" customClass="MainTableViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hgY-dX-1hm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -178,9 +177,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="trainArrival" destination="lI6-21-Atp" id="blr-at-EVj"/>
-                                    <outlet property="trainIcon" destination="B1F-7d-jZS" id="WmF-YT-tHh"/>
-                                    <outlet property="trainName" destination="qpC-J0-2RH" id="cbV-rG-cR1"/>
                                     <outlet property="BeforeStationLbl" destination="7qB-1H-zsY" id="3uE-Ik-uN5"/>
                                     <outlet property="CurrentLineLbl" destination="GsP-51-EBf" id="Mnh-7u-sDc"/>
                                     <outlet property="CurrentStationLbl" destination="hit-X6-nIY" id="II3-RU-dSr"/>
@@ -193,10 +189,6 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="bHy-Lo-Xho" id="2PQ-Qh-SdM"/>
-                            <outlet property="delegate" destination="bHy-Lo-Xho" id="VRk-ro-j5N"/>
-                        </connections>
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QHd-iY-a1h" userLabel="First Responder" sceneMemberID="firstResponder"/>

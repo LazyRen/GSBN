@@ -10,7 +10,6 @@ import UIKit
 import CoreLocation
 import MapKit
 
-<<<<<<< HEAD
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     let locationManager = CLLocationManager()
     var nearestStationX: Double = 0.0
