@@ -10,73 +10,6 @@ import UIKit
 import CoreLocation
 import MapKit
 
-struct station: Decodable{
-    var line_num: Int
-    var cyber_st_code: String
-    var xpoint_wgs: Double
-    var ypoint: Int
-    var ypoint_wgs: Double
-    var xpoint: Int
-    var station_cd: String
-    var station_nm: String
-    var fr_code: String
-}
-
-func getNearestStations (fetchLoc:GeographicPoint?, completionHandler: @escaping (_ fetchedData : [[String:Any]]) -> Void) -> Void {
-    let apistr = "http://swopenAPI.seoul.go.kr/api/subway/6e574a4d58636b6436357942596163/json/nearBy/0/5/"
-    if let locVal = fetchLoc {
-        guard let encodedUrl = (apistr + String(locVal.x) + "/" + String(locVal.y)).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed), let url = URL(string: encodedUrl) else {
-            print("failed to encode URL")
-            return
-        }
-        var request : URLRequest = URLRequest(url: url)
-        request.httpMethod = "GET"
-        let session = URLSession.shared
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let err = error {
-                print("HTTP Error")
-                print(err)
-            }
-            else {
-                if let usableData = data {
-                    do {
-                        //parse responed JSON data
-                        let jsonSerialized = try JSONSerialization.jsonObject(with: usableData, options: []) as? [String : Any]
-                        
-                        guard let json = jsonSerialized else {
-                            print("parsed JSON referring error")
-                            return
-                        }
-                        
-                        guard let fetchedStationList = json["stationList"] as? [[String:Any]] else {
-                            print("parsed JSON referring error")
-                            return
-                        }
-                        completionHandler(fetchedStationList)
-                        
-                    } catch let error as NSError {
-                        print("JSON parsing error.")
-                        print(error.localizedDescription)
-                        
-                        //api 서버가 죽는 경우가 많아서 에러가 났을 때 HTTP 코드를 볼 수 있도록 하는 코드 추가
-                        if let httpResponse = response as? HTTPURLResponse {
-                            print(httpResponse.statusCode)
-                        }
-                        
-                    }
-                }
-                
-            }
-        }
-        task.resume()
-    }
-    else {
-        print("failed to get locVal")
-        return
-    }
-}
-
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     let locationManager = CLLocationManager()
     var nearestStationX: Double = 0.0
@@ -109,18 +42,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         enableLocationServices()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
-//        if let path = Bundle.main.path(forResource: "stations", ofType: "json") {
-//            do {
-//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-//                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let stations = jsonResult["station"] as? [Any] {
-//                    print("JSON parse succeed")
-//                }
-//            } catch {
-//                print("failed to parse json file")
-//            }
-//        }
-        // Do any additional setup after loading the view, typically from a nib.
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Get current position
@@ -192,52 +113,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 }
             }
         }
-//        getNearestStations(fetchLoc: currentPosition) { fetchedData in
-//            print(fetchedData)
-//            if let tmp = fetchedData[0]["subwayXcnts"] as? String {
-//                if let x = Double(tmp) {
-//                    self.nearestStationX = Double(x)
-//                }
-//
-//            }
-//            if let tmp = fetchedData[0]["subwayYcnts"] as? String {
-//                if let y = Double(tmp) {
-//                    self.nearestStationY = Double(y)
-//                }
-//            }
-////            print(fetchedData[0]["statnNm"])
-////            print("\n")
-////            print("\(self.nearestStationX), \(self.nearestStationY)")
-////            print("\n")
-//
-//            var stationPosition : GeographicPoint = GeographicPoint(x: self.nearestStationX, y: self.nearestStationY)
-//            if let TmPosition = convert.convert(sourceType: .TM, destinationType: .WGS_84, geoPoint: stationPosition) {
-//                stationPosition = TmPosition
-////                print(TmPosition)
-//            }
-//            
-//            // Get destination position
-//            let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
-//            let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
-//            let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-//
-//            // Create request
-//            let request = MKDirectionsRequest()
-//            request.source = sourceMapItem
-//            request.destination = destinationMapItem
-//            request.transportType = MKDirectionsTransportType.walking
-//            request.requestsAlternateRoutes = false
-//            let directions = MKDirections(request: request)
-//            directions.calculate { response, error in
-//                if let route = response?.routes.first {
-////                    print(location)
-////                    print(destinationCoordinates)
-//                    print("Distance: \(route.distance), ETA: \(route.expectedTravelTime)")
-//                } else {
-//                    print("Error!")
-//                }
-//            }
-//        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
