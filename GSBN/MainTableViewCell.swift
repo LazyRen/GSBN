@@ -20,7 +20,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var DepartTimeLbl: UILabel!
     @IBOutlet weak var TrainStatusLbl: UILabel!
     @IBOutlet weak var InformationLbl: UILabel!
-    @IBOutlet weak var imgvLine : UIImageView!
+    @IBOutlet weak var LineImage : UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

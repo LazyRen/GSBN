@@ -17,15 +17,13 @@
 		39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */; };
 		39A34DC020A42F5C004321D9 /* GSBNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DBF20A42F5C004321D9 /* GSBNTests.swift */; };
 		39A34DCB20A42F5C004321D9 /* GSBNUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */; };
-		39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */; };
 		39A34DDB20A43363004321D9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDA20A43363004321D9 /* DataType.swift */; };
 		39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */; };
 		39AC641720B3550600D31F84 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AC641620B3550600D31F84 /* CoreLocation.framework */; };
-		CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6420CD17F8006A0756 /* LaunchImage.png */; };
-		CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C8920D4D59A006A0756 /* Box.png */; };
 		CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */; };
 		CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */; };
 		CE5C8CD420D4F939006A0756 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8CD320D4F939006A0756 /* Info.plist */; };
+		CE762FE020D50FCD005183B6 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE762FDF20D50FCD005183B6 /* PageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,29 +59,13 @@
 		39A34DC620A42F5C004321D9 /* GSBNUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSBNUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSBNUITests.swift; sourceTree = "<group>"; };
 		39A34DCC20A42F5C004321D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextTrainTableViewController.swift; sourceTree = "<group>"; };
 		39A34DDA20A43363004321D9 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTableViewCell.swift; sourceTree = "<group>"; };
 		39AC641620B3550600D31F84 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		CE5C8C6420CD17F8006A0756 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
-		CE5C8C6620CD1A3D006A0756 /* main1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main1024.png; path = ../../../../Documents/main1024.png; sourceTree = "<group>"; };
-		CE5C8C6720CD1A3E006A0756 /* main167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main167.png; path = ../../../../Documents/main167.png; sourceTree = "<group>"; };
-		CE5C8C6820CD1A3E006A0756 /* main80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main80.png; path = ../../../../Documents/main80.png; sourceTree = "<group>"; };
-		CE5C8C6920CD1A3E006A0756 /* main152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main152.png; path = ../../../../Documents/main152.png; sourceTree = "<group>"; };
-		CE5C8C6A20CD1A3E006A0756 /* main120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main120.png; path = ../../../../Documents/main120.png; sourceTree = "<group>"; };
-		CE5C8C6B20CD1A3E006A0756 /* main58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main58.png; path = ../../../../Documents/main58.png; sourceTree = "<group>"; };
-		CE5C8C6C20CD1A3F006A0756 /* main87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main87.png; path = ../../../../Documents/main87.png; sourceTree = "<group>"; };
-		CE5C8C6D20CD1A3F006A0756 /* main180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main180.png; path = ../../../../Documents/main180.png; sourceTree = "<group>"; };
-		CE5C8C6E20CD1A3F006A0756 /* main29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main29.png; path = ../../../../Documents/main29.png; sourceTree = "<group>"; };
-		CE5C8C6F20CD1A3F006A0756 /* main60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main60.png; path = ../../../../Documents/main60.png; sourceTree = "<group>"; };
-		CE5C8C7020CD1A3F006A0756 /* main40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main40.png; path = ../../../../Documents/main40.png; sourceTree = "<group>"; };
-		CE5C8C7120CD1A40006A0756 /* main76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main76.png; path = ../../../../Documents/main76.png; sourceTree = "<group>"; };
-		CE5C8C7220CD1A40006A0756 /* main20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main20.png; path = ../../../../Documents/main20.png; sourceTree = "<group>"; };
-		CE5C8C8720D4D57F006A0756 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = ../../../Documents/line.png; sourceTree = "<group>"; };
-		CE5C8C8920D4D59A006A0756 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
 		CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		CE5C8CD320D4F939006A0756 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE762FDF20D50FCD005183B6 /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +105,6 @@
 		39A34D9E20A42F5B004321D9 = {
 			isa = PBXGroup;
 			children = (
-				CE5C8C4820CD178C006A0756 /* Images */,
 				39A34DA920A42F5B004321D9 /* GSBN */,
 				39A34DBE20A42F5C004321D9 /* GSBNTests */,
 				39A34DC920A42F5C004321D9 /* GSBNUITests */,
@@ -147,7 +128,6 @@
 			children = (
 				398DF3E820CCFA72004E14E7 /* stations.json */,
 				39A34DDA20A43363004321D9 /* DataType.swift */,
-				39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */,
 				39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				398A590920D4C8C5004F547C /* RealtimeSubwayLib.swift */,
@@ -159,6 +139,7 @@
 				39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */,
 				CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */,
 				CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */,
+				CE762FDF20D50FCD005183B6 /* PageVC.swift */,
 			);
 			path = GSBN;
 			sourceTree = "<group>";
@@ -179,37 +160,6 @@
 				39A34DCC20A42F5C004321D9 /* Info.plist */,
 			);
 			path = GSBNUITests;
-			sourceTree = "<group>";
-		};
-		CE5C8C4820CD178C006A0756 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				CE5C8C8920D4D59A006A0756 /* Box.png */,
-				CE5C8C8720D4D57F006A0756 /* line.png */,
-				CE5C8C6420CD17F8006A0756 /* LaunchImage.png */,
-				CE5C8C4920CD1797006A0756 /* Icon */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		CE5C8C4920CD1797006A0756 /* Icon */ = {
-			isa = PBXGroup;
-			children = (
-				CE5C8C7220CD1A40006A0756 /* main20.png */,
-				CE5C8C6E20CD1A3F006A0756 /* main29.png */,
-				CE5C8C7020CD1A3F006A0756 /* main40.png */,
-				CE5C8C6B20CD1A3E006A0756 /* main58.png */,
-				CE5C8C6F20CD1A3F006A0756 /* main60.png */,
-				CE5C8C7120CD1A40006A0756 /* main76.png */,
-				CE5C8C6820CD1A3E006A0756 /* main80.png */,
-				CE5C8C6C20CD1A3F006A0756 /* main87.png */,
-				CE5C8C6A20CD1A3E006A0756 /* main120.png */,
-				CE5C8C6920CD1A3E006A0756 /* main152.png */,
-				CE5C8C6720CD1A3E006A0756 /* main167.png */,
-				CE5C8C6D20CD1A3F006A0756 /* main180.png */,
-				CE5C8C6620CD1A3D006A0756 /* main1024.png */,
-			);
-			path = Icon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,12 +266,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
 				398DF3E920CCFA72004E14E7 /* stations.json in Resources */,
-				CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */,
-				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
 				CE5C8CD420D4F939006A0756 /* Info.plist in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
@@ -354,10 +301,10 @@
 				39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */,
 				39A34DDB20A43363004321D9 /* DataType.swift in Sources */,
 				398A590A20D4C8C5004F547C /* RealtimeSubwayLib.swift in Sources */,
-				39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */,
 				39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */,
 				39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */,
 				CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */,
+				CE762FE020D50FCD005183B6 /* PageVC.swift in Sources */,
 				CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
