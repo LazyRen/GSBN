@@ -11,16 +11,14 @@
 		398A590A20D4C8C5004F547C /* RealtimeSubwayLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398A590920D4C8C5004F547C /* RealtimeSubwayLib.swift */; };
 		398DF3E920CCFA72004E14E7 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = 398DF3E820CCFA72004E14E7 /* stations.json */; };
 		39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DAA20A42F5B004321D9 /* AppDelegate.swift */; };
-		39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DAC20A42F5B004321D9 /* ViewController.swift */; };
 		39A34DB020A42F5B004321D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A34DAE20A42F5B004321D9 /* Main.storyboard */; };
 		39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39A34DB120A42F5C004321D9 /* Assets.xcassets */; };
 		39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */; };
 		39A34DC020A42F5C004321D9 /* GSBNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DBF20A42F5C004321D9 /* GSBNTests.swift */; };
 		39A34DCB20A42F5C004321D9 /* GSBNUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */; };
-		39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */; };
 		39A34DDB20A43363004321D9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDA20A43363004321D9 /* DataType.swift */; };
-		39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */; };
 		39AC641720B3550600D31F84 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39AC641620B3550600D31F84 /* CoreLocation.framework */; };
+		39C7AB1E20D78EEF0021C8B2 /* station.json in Resources */ = {isa = PBXBuildFile; fileRef = 39C7AB1D20D78EEF0021C8B2 /* station.json */; };
 		CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C6420CD17F8006A0756 /* LaunchImage.png */; };
 		CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8C8920D4D59A006A0756 /* Box.png */; };
 		CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */; };
@@ -51,7 +49,6 @@
 		398DF3E820CCFA72004E14E7 /* stations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
 		39A34DA720A42F5B004321D9 /* GSBN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSBN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A34DAA20A42F5B004321D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		39A34DAC20A42F5B004321D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		39A34DAF20A42F5B004321D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39A34DB120A42F5C004321D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39A34DB420A42F5C004321D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -61,10 +58,9 @@
 		39A34DC620A42F5C004321D9 /* GSBNUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSBNUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSBNUITests.swift; sourceTree = "<group>"; };
 		39A34DCC20A42F5C004321D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextTrainTableViewController.swift; sourceTree = "<group>"; };
 		39A34DDA20A43363004321D9 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
-		39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTableViewCell.swift; sourceTree = "<group>"; };
 		39AC641620B3550600D31F84 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		39C7AB1D20D78EEF0021C8B2 /* station.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = station.json; sourceTree = "<group>"; };
 		CE5C8C6420CD17F8006A0756 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 		CE5C8C6620CD1A3D006A0756 /* main1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main1024.png; path = ../../../../Documents/main1024.png; sourceTree = "<group>"; };
 		CE5C8C6720CD1A3E006A0756 /* main167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main167.png; path = ../../../../Documents/main167.png; sourceTree = "<group>"; };
@@ -79,7 +75,6 @@
 		CE5C8C7020CD1A3F006A0756 /* main40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main40.png; path = ../../../../Documents/main40.png; sourceTree = "<group>"; };
 		CE5C8C7120CD1A40006A0756 /* main76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main76.png; path = ../../../../Documents/main76.png; sourceTree = "<group>"; };
 		CE5C8C7220CD1A40006A0756 /* main20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main20.png; path = ../../../../Documents/main20.png; sourceTree = "<group>"; };
-		CE5C8C8720D4D57F006A0756 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = ../../../Documents/line.png; sourceTree = "<group>"; };
 		CE5C8C8920D4D59A006A0756 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
 		CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
@@ -146,13 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				398DF3E820CCFA72004E14E7 /* stations.json */,
+				39C7AB1D20D78EEF0021C8B2 /* station.json */,
 				39A34DDA20A43363004321D9 /* DataType.swift */,
-				39A34DD820A4321F004321D9 /* NextTrainTableViewController.swift */,
-				39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				398A590920D4C8C5004F547C /* RealtimeSubwayLib.swift */,
 				CE5C8CD320D4F939006A0756 /* Info.plist */,
-				39A34DAC20A42F5B004321D9 /* ViewController.swift */,
 				391B6B2720CD1E3C00FBEBE0 /* GeoConverter.swift */,
 				39A34DAE20A42F5B004321D9 /* Main.storyboard */,
 				39A34DB120A42F5C004321D9 /* Assets.xcassets */,
@@ -185,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				CE5C8C8920D4D59A006A0756 /* Box.png */,
-				CE5C8C8720D4D57F006A0756 /* line.png */,
 				CE5C8C6420CD17F8006A0756 /* LaunchImage.png */,
 				CE5C8C4920CD1797006A0756 /* Icon */,
 			);
@@ -322,6 +314,7 @@
 				398DF3E920CCFA72004E14E7 /* stations.json in Resources */,
 				CE5C8C8A20D4D59A006A0756 /* Box.png in Resources */,
 				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
+				39C7AB1E20D78EEF0021C8B2 /* station.json in Resources */,
 				CE5C8CD420D4F939006A0756 /* Info.plist in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
@@ -351,11 +344,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				391B6B2820CD1E3C00FBEBE0 /* GeoConverter.swift in Sources */,
-				39A34DAD20A42F5B004321D9 /* ViewController.swift in Sources */,
 				39A34DDB20A43363004321D9 /* DataType.swift in Sources */,
 				398A590A20D4C8C5004F547C /* RealtimeSubwayLib.swift in Sources */,
-				39A34DD920A4321F004321D9 /* NextTrainTableViewController.swift in Sources */,
-				39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */,
 				39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */,
 				CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */,
 				CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */,
