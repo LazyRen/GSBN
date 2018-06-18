@@ -155,14 +155,14 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                         tmp.befStatoin = sidestations[0]
                                         tmp.aftStation = sidestations[1]
                                         tmp.trainStatus = entry.directionInfo
-                                        tmp.TrainArrival = entry.arrivalMsg
+                                        tmp.TrainArrival = entry.arrivalMsg + "열차 도착예정"
                                         let t = entry.leftTime - Int(calcuatedETA)
                                         print("t: \(t)")
                                         if (t >= 60) {
-                                            tmp.departTime = "\(t/60) 분 \(t%60)초 후 출발"
+                                            tmp.departTime = "\(t/60) 분 \(t%60)초 후 출발하세요"
                                         }
                                         else {
-                                            tmp.departTime = "\(t%60)초 후 출발"
+                                            tmp.departTime = "\(t%60)초 후 출발하세요"
                                         }
                                         if (t > 0) {
                                             infoList.append(tmp)
