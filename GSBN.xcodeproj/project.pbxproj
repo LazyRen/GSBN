@@ -24,6 +24,7 @@
 		CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */; };
 		CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */; };
 		CE5C8CD420D4F939006A0756 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE5C8CD320D4F939006A0756 /* Info.plist */; };
+		CE762FE020D50FCD005183B6 /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE762FDF20D50FCD005183B6 /* PageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		CE5C8CD320D4F939006A0756 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE762FDF20D50FCD005183B6 /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +120,6 @@
 		39A34D9E20A42F5B004321D9 = {
 			isa = PBXGroup;
 			children = (
-				CE5C8C4820CD178C006A0756 /* Images */,
 				39A34DA920A42F5B004321D9 /* GSBN */,
 				39A34DBE20A42F5C004321D9 /* GSBNTests */,
 				39A34DC920A42F5C004321D9 /* GSBNUITests */,
@@ -143,6 +144,7 @@
 				398DF3E820CCFA72004E14E7 /* stations.json */,
 				39C7AB1D20D78EEF0021C8B2 /* station.json */,
 				39A34DDA20A43363004321D9 /* DataType.swift */,
+				39A34DDC20A448E8004321D9 /* TrainTableViewCell.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				398A590920D4C8C5004F547C /* RealtimeSubwayLib.swift */,
 				CE5C8CD320D4F939006A0756 /* Info.plist */,
@@ -152,6 +154,7 @@
 				39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */,
 				CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */,
 				CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */,
+				CE762FDF20D50FCD005183B6 /* PageVC.swift */,
 			);
 			path = GSBN;
 			sourceTree = "<group>";
@@ -308,7 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5C8C6520CD17F9006A0756 /* LaunchImage.png in Resources */,
 				39A34DB520A42F5C004321D9 /* LaunchScreen.storyboard in Resources */,
 				39A34DB220A42F5C004321D9 /* Assets.xcassets in Resources */,
 				398DF3E920CCFA72004E14E7 /* stations.json in Resources */,
@@ -346,8 +348,10 @@
 				391B6B2820CD1E3C00FBEBE0 /* GeoConverter.swift in Sources */,
 				39A34DDB20A43363004321D9 /* DataType.swift in Sources */,
 				398A590A20D4C8C5004F547C /* RealtimeSubwayLib.swift in Sources */,
+				39A34DDD20A448E8004321D9 /* TrainTableViewCell.swift in Sources */,
 				39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */,
 				CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */,
+				CE762FE020D50FCD005183B6 /* PageVC.swift in Sources */,
 				CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

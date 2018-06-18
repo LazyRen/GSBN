@@ -50,11 +50,11 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
     var nearestStationX: Double = 0.0
     var nearestStationY: Double = 0.0
     let Train = ["동대문역사문화공원", "왕십리", "상왕십리"]
-    
+
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
-        
+
         func enableLocationServices() {
             locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
@@ -66,7 +66,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                 break;
             }
         }
-        
+
         enableLocationServices()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
@@ -77,8 +77,8 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500)
         let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-    
-        
+
+
         //        locationManager.stopUpdatingLocation()
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         let convert : GeoConverter = GeoConverter()
@@ -90,7 +90,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         else {
             print("failed to convert")
         }
-        
+
 //        print("position converted: \(currentPosition)")
         let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: locValue.longitude, WGS_E: locValue.latitude)
         nearestStation.getNearestStations { (fetchedStations) in
@@ -101,12 +101,12 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                 if let TmPosition = convert.convert(sourceType: .TM, destinationType: .WGS_84, geoPoint: stationPosition) {
                     stationPosition = TmPosition
                 }
-                
+
                 // Get destination position
                 let destinationCoordinates = CLLocationCoordinate2DMake(stationPosition.y, stationPosition.x)
                 let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-                
+
                 // Create request
                 let request = MKDirectionsRequest()
                 request.source = sourceMapItem
@@ -173,7 +173,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                             })
                                         }
                                     }
-                                    
+
                                 })
                             }
                         })
@@ -195,7 +195,9 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         print("infolist count \(infoList.count)")
         return infoList.count
     }
-    
+
+
+
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell") as! MainTableViewCell
@@ -207,7 +209,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
 //        cell.CurrentStationLbl.text = "월드컵경기장"
 //        cell.BeforeStationLbl.text = "마포구청"
 //        cell.TrainStatusLbl.text = "마포구청역 출발"
-        
+
         cell.CurrentLineLbl.text = tmp.curLine
         cell.InformationLbl.text = tmp.information
         cell.DepartTimeLbl.text = tmp.departTime
@@ -216,11 +218,49 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         cell.CurrentStationLbl.text = tmp.curStation
         cell.BeforeStationLbl.text = tmp.befStatoin
         cell.TrainStatusLbl.text = tmp.trainStatus
+        let Line = "3"
 
-        
-        
+        let templateImage = cell.LineImage.image?.withRenderingMode(.alwaysTemplate)
+        cell.LineImage.image=templateImage
+        switch Line {
+        case "1":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(40.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(148.0/255.0), alpha: CGFloat(1.0))
+        case "2":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(65.0/255.0), green: CGFloat(175.0/255.0), blue: CGFloat(78.0/255.0), alpha: CGFloat(1.0))
+        case "3":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(253.0/255.0), green: CGFloat(115.0/255.0), blue: CGFloat(34.0/255.0), alpha: CGFloat(1.0))
+        case "4":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(52.0/255.0), green: CGFloat(159.0/255.0), blue: CGFloat(219.0/255.0), alpha: CGFloat(1.0))
+        case "5":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(136.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(221.0/255.0), alpha: CGFloat(1.0))
+        case "6":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(179.0/255.0), green: CGFloat(80.0/255.0), blue: CGFloat(26.0/255.0), alpha: CGFloat(1.0))
+        case "7":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(105.0/255.0), green: CGFloat(113.0/255.0), blue: CGFloat(31.0/255.0), alpha: CGFloat(1.0))
+
+        case "8":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(224.0/255.0), green: CGFloat(37.0/255.0), blue: CGFloat(110.0/255.0), alpha: CGFloat(1.0))
+        case "9":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(205.0/255.0), green: CGFloat(163.0/255.0), blue: CGFloat(68.0/255.0), alpha: CGFloat(1.0))
+        case "K":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(142.0/255.0), green: CGFloat(202.0/255.0), blue: CGFloat(176.0/255.0), alpha: CGFloat(1.0))
+        case "G":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(30.0/255.0), green: CGFloat(174.0/255.0), blue: CGFloat(124.0/255.0), alpha: CGFloat(1.0))
+        case "A":
+              cell.LineImage.tintColor=UIColor(red: CGFloat(118.0/255.0), green: CGFloat(183.0/255.0), blue: CGFloat(226.0/255.0), alpha: CGFloat(1.0))
+        case "B":
+              cell.LineImage.tintColor=UIColor(red: CGFloat(254.0/255.0), green: CGFloat(205.0/255.0), blue: CGFloat(69.0/255.0), alpha: CGFloat(1.0))
+        case "S":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(165.0/255.0), green: CGFloat(32.0/255.0), blue: CGFloat(52.0/255.0), alpha: CGFloat(1.0))
+        case "I":
+             cell.LineImage.tintColor=UIColor(red: CGFloat(113.0/255.0), green: CGFloat(154.0/255.0), blue: CGFloat(206.0/255.0), alpha: CGFloat(1.0))
+        case "SU":
+            cell.LineImage.tintColor=UIColor(red: CGFloat(252.0/255.0), green: CGFloat(203.0/255.0), blue: CGFloat(68.0/255.0), alpha: CGFloat(1.0))
+        default : cell.LineImage.tintColor=UIColor(red: CGFloat(252.0/255.0), green: CGFloat(203.0/255.0), blue: CGFloat(68.0/255.0), alpha: CGFloat(1.0))
+        }
+
         return cell
-        
+
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -248,7 +288,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
