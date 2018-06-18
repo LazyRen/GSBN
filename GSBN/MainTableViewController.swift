@@ -40,6 +40,8 @@ class MainTableViewController: UITableViewController {
         return 1
     }
     
+    
+    
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainCell") as! MainTableViewCell
