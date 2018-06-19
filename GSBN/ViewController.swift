@@ -28,9 +28,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         // Get current position
         let location = locations.first!
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500)
-        let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
-        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+//        let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
+//        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
         MyMapView.setRegion(coordinateRegion, animated: true)
+        if let anno = destiAnno {
+            MyMapView.addAnnotation(anno)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

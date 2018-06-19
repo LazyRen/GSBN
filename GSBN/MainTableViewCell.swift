@@ -22,6 +22,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var InformationLbl: UILabel!
     @IBOutlet weak var LineImage : UIImageView!
     @IBOutlet weak var BoxImage: UIImageView!
+    @IBOutlet weak var lastTrainLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

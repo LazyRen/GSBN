@@ -35,6 +35,18 @@ struct printInfo {
     }
 }
 
+class stationAnnotation: NSObject, MKAnnotation {
+    var title: String?
+    var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    init(title:String, subtitle: String, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = coordinate
+    }
+}
+var destiAnno: stationAnnotation? = nil
+
 class MainTableViewController: UITableViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     
@@ -101,6 +113,9 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                 let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinates, addressDictionary: nil)
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
 
+                // Create Annotation
+                destiAnno = stationAnnotation(title: fetchedStations.stationOrderList[0], subtitle: "Destination", coordinate: destinationCoordinates)
+                
                 // Create request
                 let request = MKDirectionsRequest()
                 request.source = sourceMapItem
@@ -115,7 +130,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                     } else {
                         print("Error!")
                     }
-                    let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
+                    let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[0], lineInfoList: stationInfo)
                     curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
                         fetchedArrivalInfo.keys.map({ (line) -> Void in
                             fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
@@ -222,8 +237,14 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         cell.CurrentStationLbl.text = tmp.curStation
         cell.BeforeStationLbl.text = tmp.befStatoin
         cell.TrainStatusLbl.text = tmp.trainStatus
+        if tmp.isLast == 1 {
+            cell.lastTrainLbl.isHidden = false
+        }
+        else {
+            cell.lastTrainLbl.isHidden = true
+        }
         
-        var Line = tmp.curLine.substring(to: tmp.curLine.index(after: tmp.curLine.startIndex))
+        var Line: String = ""
         switch tmp.curLine {
         case "경의중앙선":
             Line = "K"
@@ -242,14 +263,6 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         default:
             Line = tmp.curLine.substring(to: tmp.curLine.index(after: tmp.curLine.startIndex))
         }
-        
-        let tempImage = cell.BoxImage.image?.withRenderingMode(.alwaysTemplate)
-        cell.BoxImage.image = tempImage
-        if tmp.isLast == 1 {
-            cell.BoxImage.tintColor = UIColor.red
-        }
-        
-        
         
         let templateImage = cell.LineImage.image?.withRenderingMode(.alwaysTemplate)
         cell.LineImage.image=templateImage
