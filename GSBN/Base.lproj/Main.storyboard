@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xIj-h7-azd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eT1-5F-j7w">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -55,7 +55,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="332.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Box" translatesAutoresizingMaskIntoConstraints="NO" id="J38-DQ-dTy" customClass="UINextStationLabel">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Box" translatesAutoresizingMaskIntoConstraints="NO" id="J38-DQ-dTy">
                                             <rect key="frame" x="10" y="14" width="355" height="312.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="312.5" id="jqT-Nb-xcV"/>
@@ -167,6 +167,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="BeforeStationLbl" destination="7qB-1H-zsY" id="3uE-Ik-uN5"/>
+                                    <outlet property="BoxImage" destination="J38-DQ-dTy" id="ZcD-Pv-4tS"/>
                                     <outlet property="CurrentLineLbl" destination="GsP-51-EBf" id="Mnh-7u-sDc"/>
                                     <outlet property="CurrentStationLbl" destination="hit-X6-nIY" id="II3-RU-dSr"/>
                                     <outlet property="DepartTimeLbl" destination="eUi-Jr-IEw" id="uaU-5y-fCe"/>
