@@ -114,73 +114,74 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                     } else {
                         print("Error!")
                     }
-                }
-                let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
-                curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
-                    fetchedArrivalInfo.keys.map({ (line) -> Void in
-                        fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
-                            if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
-                                entrys.map({ (entry) -> Void in
-                                    //print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
-                                    print(entry)
-                                    var inserted: Bool = false
-                                    for item in infoList {
-                                        if (entry.directionInfo == item.trainStatus) {
-                                            inserted = true
-                                            break
+                    let curArrivalInfo = realtimeSubwayArrivalInfo.init(stationName: fetchedStations.stationOrderList[1], lineInfoList: stationInfo)
+                    curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
+                        fetchedArrivalInfo.keys.map({ (line) -> Void in
+                            fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
+                                if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
+                                    entrys.map({ (entry) -> Void in
+                                        //print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
+                                        print(entry)
+                                        var inserted: Bool = false
+                                        for item in infoList {
+                                            if (entry.directionInfo == item.trainStatus) {
+                                                inserted = true
+                                                break
+                                            }
                                         }
-                                    }
-                                    if (!inserted) {
-//                                        print(line)
-//                                        print(calcuatedETA)
-//                                        print(entry.curStationName)
-//                                        print(entry.directionInfo)
-//                                        print(entry.arrivalMsg)
-//                                        print(Double(entry.leftTime) - calcuatedETA)
-                                        var tmp : printInfo = printInfo.init()
-                                        var sidestations = getSideStation(stationName: entry.stationName, lineName: line, updownFlag: entry.updownFlag)
-                                        if (entry.lastFlag == 1) {
-                                            tmp.isLast = 1
-                                        }
-                                        self.stName = entry.stationName
-                                        tmp.curLine = line
-                                        tmp.information = entry.stationName
-                                        tmp.curStation = entry.stationName
-                                        tmp.befStatoin = sidestations[0]
-                                        tmp.aftStation = sidestations[1]
-                                        tmp.trainStatus = entry.directionInfo
-                                        tmp.TrainArrival = entry.arrivalMsg + " 열차 도착 예정"
-                                        let msgtmp = Int(entry.arrivalMsg[..<entry.arrivalMsg.index(entry.arrivalMsg.startIndex, offsetBy: 1)])
-                                        if msgtmp == nil {
-                                            tmp.TrainArrival = entry.arrivalMsg
-                                        }
-                                        else {
+                                        if (!inserted) {
+                                            //                                        print(line)
+                                            //                                        print(calcuatedETA)
+                                            //                                        print(entry.curStationName)
+                                            //                                        print(entry.directionInfo)
+                                            //                                        print(entry.arrivalMsg)
+                                            //                                        print(Double(entry.leftTime) - calcuatedETA)
+                                            var tmp : printInfo = printInfo.init()
+                                            var sidestations = getSideStation(stationName: entry.stationName, lineName: line, updownFlag: entry.updownFlag)
+                                            if (entry.lastFlag == 1) {
+                                                tmp.isLast = 1
+                                            }
+                                            self.stName = entry.stationName
+                                            tmp.curLine = line
+                                            tmp.information = entry.stationName
+                                            tmp.curStation = entry.stationName
+                                            tmp.befStatoin = sidestations[0]
+                                            tmp.aftStation = sidestations[1]
+                                            tmp.trainStatus = entry.directionInfo
                                             tmp.TrainArrival = entry.arrivalMsg + " 열차 도착 예정"
+                                            let msgtmp = Int(entry.arrivalMsg[..<entry.arrivalMsg.index(entry.arrivalMsg.startIndex, offsetBy: 1)])
+                                            if msgtmp == nil {
+                                                tmp.TrainArrival = entry.arrivalMsg
+                                            }
+                                            else {
+                                                tmp.TrainArrival = entry.arrivalMsg + " 열차 도착 예정"
+                                            }
+                                            let t = entry.leftTime - Int(calcuatedETA)
+                                            print("t: \(t)")
+                                            if (t >= 60) {
+                                                tmp.departTime = "\(t/60) 분 \(t%60)초 후 출발하세요"
+                                            }
+                                            else {
+                                                tmp.departTime = "\(t%60)초 후 출발하세요"
+                                            }
+                                            if (t > 0) {
+                                                infoList.append(tmp)
+                                                print(tmp)
+                                                DispatchQueue.main.async(execute: {() -> Void in
+                                                    print("Reloading tableView")
+                                                    self.stationName.text = self.stName
+                                                    self.tableView?.reloadData();
+                                                })
+                                            }
                                         }
-                                        let t = entry.leftTime - Int(calcuatedETA)
-                                        print("t: \(t)")
-                                        if (t >= 60) {
-                                            tmp.departTime = "\(t/60) 분 \(t%60)초 후 출발하세요"
-                                        }
-                                        else {
-                                            tmp.departTime = "\(t%60)초 후 출발하세요"
-                                        }
-                                        if (t > 0) {
-                                            infoList.append(tmp)
-                                            print(tmp)
-                                            DispatchQueue.main.async(execute: {() -> Void in
-                                                print("Reloading tableView")
-                                                self.stationName.text = self.stName
-                                                self.tableView?.reloadData();
-                                            })
-                                        }
-                                    }
-
-                                })
-                            }
+                                        
+                                    })
+                                }
+                            })
                         })
                     })
-                })
+                }
+                
             }
         }
     }
