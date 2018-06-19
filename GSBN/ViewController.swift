@@ -10,9 +10,11 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
-    @IBOutlet weak var MyMapView: MKMapView!
+
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+    
+   @IBOutlet weak var MyMapView: MKMapView!
     
     let locationManager = CLLocationManager()
     override func viewDidLoad() {
@@ -31,15 +33,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 //        let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
 //        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
         MyMapView.setRegion(coordinateRegion, animated: true)
-        if let anno = destiAnno {
-            MyMapView.addAnnotation(anno)
-        }
+        
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func addMapAnnotation(destiAnno: stationAnnotation?) {
+        if let tmpAnno = destiAnno {
+            MyMapView.addAnnotation(tmpAnno)
+        }
+    }
 
     /*
     // MARK: - Navigation
