@@ -129,7 +129,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                             if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
                                 entrys.map({ (entry) -> Void in
                                     //print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
-//                                    print(entry)
+                                    print(entry)
                                     var inserted: Bool = false
                                     for item in infoList {
                                         if (entry.directionInfo == item.trainStatus) {
@@ -218,7 +218,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         cell.CurrentStationLbl.text = tmp.curStation
         cell.BeforeStationLbl.text = tmp.befStatoin
         cell.TrainStatusLbl.text = tmp.trainStatus
-        let Line = "3"
+        let Line = tmp.curLine
 
         let templateImage = cell.LineImage.image?.withRenderingMode(.alwaysTemplate)
         cell.LineImage.image=templateImage
