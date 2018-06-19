@@ -11,54 +11,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="Rht-fy-QgN">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KOT-Kf-z6v">
-                                <rect key="frame" x="16" y="345" width="343" height="302"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="resultLabel1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaG-sU-zrm" userLabel="printLabel">
-                                <rect key="frame" x="47" y="77" width="301" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="resultLabel2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXL-FE-pdL">
-                                <rect key="frame" x="47" y="179" width="287" height="115"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnK-Or-BDg">
-                                <rect key="frame" x="16" y="302" width="343" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <connections>
-                        <outlet property="myMapKitView" destination="KOT-Kf-z6v" id="sRv-PD-EJC"/>
-                        <outlet property="resultLabel" destination="uaG-sU-zrm" id="GAf-gY-dmh"/>
-                        <outlet property="resultLabel2" destination="uXL-FE-pdL" id="CVK-sd-1mF"/>
-                        <outlet property="testLabel" destination="ZnK-Or-BDg" id="zh9-wb-pr2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="572" y="759"/>
-        </scene>
         <!--PageVC-->
         <scene sceneID="gT9-Eo-T7b">
             <objects>
@@ -82,8 +34,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="왕십리역" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gz7-Ma-M9v">
-                                    <rect key="frame" x="146" y="7.5" width="83.5" height="29"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gz7-Ma-M9v">
+                                    <rect key="frame" x="185" y="7.5" width="5.5" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -228,6 +180,9 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <connections>
+                        <outlet property="stationName" destination="Gz7-Ma-M9v" id="PGU-hw-vxm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QHd-iY-a1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,7 +191,7 @@
         <!--View Controller-->
         <scene sceneID="KbW-Zf-Nh0">
             <objects>
-                <viewController restorationIdentifier="SecondVC" storyboardIdentifier="SecondVC" id="VX6-z0-jsU" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SecondVC" storyboardIdentifier="SecondVC" id="VX6-z0-jsU" customClass="ViewController" customModule="GSBN" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B0r-89-DUr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,10 +229,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="arI-oz-teL"/>
                     </view>
+                    <connections>
+                        <outlet property="MyMapView" destination="bJa-WW-XAN" id="cJI-tR-I8J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fe6-VN-yLx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2072.8000000000002" y="31.934032983508249"/>
+            <point key="canvasLocation" x="2031" y="32"/>
         </scene>
     </scenes>
     <resources>

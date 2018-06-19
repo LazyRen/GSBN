@@ -1,3 +1,21 @@
+Skip to content
+
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @LazyRen Sign out
+3
+2 0 ProjectInTheClass/GSBN
+ Code  Issues 4  Pull requests 0  Projects 0  Wiki  Insights  Settings
+GSBN/GSBN/MainTableViewController.swift
+b01e167  18 hours ago
+@LazyRen LazyRen launch merge
+@LazyRen @ladin22
+
+321 lines (284 sloc)  15.1 KB
 //
 //  MainTableViewController.swift
 //  GSBN
@@ -5,7 +23,6 @@
 //  Created by User on 2018. 6. 16..
 //  Copyright © 2018년 Lazy Ren. All rights reserved.
 //
-
 import UIKit
 import CoreLocation
 import MapKit
@@ -35,20 +52,26 @@ struct printInfo {
     }
 }
 
+//cell.CurrentLineLbl.text = "6"
+//cell.CurrentStationLbl.text = "동대문역사문화공원"
+//cell.DepartTimeLbl.text = "6분 뒤 열차 도착"
+//cell.InformationLbl.text = "6호선 합정역 월드컵경기장 방면"
+//cell.NextStationLbl.text = "디지털미디어시티"
+//cell.CurrentStationLbl.text = "월드컵경기장"
+//cell.BeforeStationLbl.text = "마포구청"
+//cell.TrainStatusLbl.text = "마포구청역 출발"
 class MainTableViewController: UITableViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
-    @IBOutlet weak var stationName: UILabel!
-    var stName : String = ""
     let locationManager = CLLocationManager()
     var nearestStationX: Double = 0.0
     var nearestStationY: Double = 0.0
+    let Train = ["동대문역사문화공원", "왕십리", "상왕십리"]
 
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        print ("enableLocationServices")
+
         func enableLocationServices() {
-            print ("enableLocationServices")
             locationManager.delegate = self
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
@@ -71,20 +94,20 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
 
-        print("locationManager")
+
         //        locationManager.stopUpdatingLocation()
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         let convert : GeoConverter = GeoConverter()
         var currentPosition : GeographicPoint = GeographicPoint(x: locValue.longitude, y: locValue.latitude)
         if let TmPosition = convert.convert(sourceType: .WGS_84, destinationType: .TM, geoPoint: currentPosition) {
             currentPosition = TmPosition
-            print(TmPosition)
+            //            print(TmPosition)
         }
         else {
             print("failed to convert")
         }
 
-        print("position converted: \(currentPosition)")
+//        print("position converted: \(currentPosition)")
         let nearestStation = RealtimeSubwayNearestStations.init(WGS_N: locValue.longitude, WGS_E: locValue.latitude)
         nearestStation.getNearestStations { (fetchedStations) in
             if let stationInfo = fetchedStations.stationList[nearestStation.stationInfo.stationOrderList[0]] {
@@ -122,7 +145,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                             if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
                                 entrys.map({ (entry) -> Void in
                                     //print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
-                                    print(entry)
+//                                    print(entry)
                                     var inserted: Bool = false
                                     for item in infoList {
                                         if (entry.directionInfo == item.trainStatus) {
@@ -142,21 +165,13 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                         if (entry.lastFlag == 1) {
                                             tmp.isLast = 1
                                         }
-                                        self.stName = entry.stationName
-                                        tmp.curLine = line
+                                        tmp.curLine = line.substring(to: line.index(after: line.startIndex))
                                         tmp.information = entry.stationName
                                         tmp.curStation = entry.stationName
                                         tmp.befStatoin = sidestations[0]
                                         tmp.aftStation = sidestations[1]
                                         tmp.trainStatus = entry.directionInfo
-                                        tmp.TrainArrival = entry.arrivalMsg + " 열차 도착 예정"
-                                        let msgtmp = Int(entry.arrivalMsg[..<entry.arrivalMsg.index(entry.arrivalMsg.startIndex, offsetBy: 1)])
-                                        if msgtmp == nil {
-                                            tmp.TrainArrival = entry.arrivalMsg
-                                        }
-                                        else {
-                                            tmp.TrainArrival = entry.arrivalMsg + " 열차 도착 예정"
-                                        }
+                                        tmp.TrainArrival = entry.arrivalMsg + "열차 도착예정"
                                         let t = entry.leftTime - Int(calcuatedETA)
                                         print("t: \(t)")
                                         if (t >= 60) {
@@ -170,7 +185,6 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                             print(tmp)
                                             DispatchQueue.main.async(execute: {() -> Void in
                                                 print("Reloading tableView")
-                                                self.stationName.text = self.stName
                                                 self.tableView?.reloadData();
                                             })
                                         }
@@ -186,7 +200,6 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -211,8 +224,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
 //        cell.CurrentStationLbl.text = "월드컵경기장"
 //        cell.BeforeStationLbl.text = "마포구청"
 //        cell.TrainStatusLbl.text = "마포구청역 출발"
-        
-        cell.CurrentLineLbl.text = tmp.curLine.substring(to: tmp.curLine.index(after: tmp.curLine.startIndex))
+        cell.CurrentLineLbl.text = tmp.curLine
         cell.InformationLbl.text = tmp.information
         cell.DepartTimeLbl.text = tmp.departTime
         cell.TrainArrivalTimeLbl.text = tmp.TrainArrival
@@ -220,27 +232,8 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
         cell.CurrentStationLbl.text = tmp.curStation
         cell.BeforeStationLbl.text = tmp.befStatoin
         cell.TrainStatusLbl.text = tmp.trainStatus
-        
-        var Line = tmp.curLine.substring(to: tmp.curLine.index(after: tmp.curLine.startIndex))
-        switch tmp.curLine {
-        case "경의중앙선":
-            Line = "K"
-        case "경춘선":
-            Line = "G"
-        case "공항철도":
-            Line = "A"
-        case "분당선":
-            Line = "B"
-        case "신분당선":
-            Line = "S"
-        case "인천1호선":
-            Line = "I"
-        case "수인선":
-            Line = "SU"
-        default:
-            Line = tmp.curLine.substring(to: tmp.curLine.index(after: tmp.curLine.startIndex))
-        }
-        
+        let Line = "3"
+
         let templateImage = cell.LineImage.image?.withRenderingMode(.alwaysTemplate)
         cell.LineImage.image=templateImage
         switch Line {
@@ -286,9 +279,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
         // Configure the cell...
-
         return cell
     }
     */
@@ -316,7 +307,6 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
     }
     */
 
@@ -330,7 +320,6 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
 
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -339,3 +328,16 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
     */
 
 }
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
+Press h to open a hovercard with more details.

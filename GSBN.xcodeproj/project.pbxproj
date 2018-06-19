@@ -17,6 +17,7 @@
 		39A34DC020A42F5C004321D9 /* GSBNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DBF20A42F5C004321D9 /* GSBNTests.swift */; };
 		39A34DCB20A42F5C004321D9 /* GSBNUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */; };
 		39A34DDB20A43363004321D9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A34DDA20A43363004321D9 /* DataType.swift */; };
+		39ACD8AA20D8DEE900D48DC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ACD8A920D8DEE900D48DC0 /* ViewController.swift */; };
 		39C7AB1E20D78EEF0021C8B2 /* station.json in Resources */ = {isa = PBXBuildFile; fileRef = 39C7AB1D20D78EEF0021C8B2 /* station.json */; };
 		CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */; };
 		CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */; };
@@ -57,6 +58,7 @@
 		39A34DCA20A42F5C004321D9 /* GSBNUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSBNUITests.swift; sourceTree = "<group>"; };
 		39A34DCC20A42F5C004321D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39A34DDA20A43363004321D9 /* DataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
+		39ACD8A920D8DEE900D48DC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		39C7AB1D20D78EEF0021C8B2 /* station.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = station.json; sourceTree = "<group>"; };
 		CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		CE5C8C9320D4EA52006A0756 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
@@ -112,14 +114,15 @@
 		39A34DA920A42F5B004321D9 /* GSBN */ = {
 			isa = PBXGroup;
 			children = (
+				CE5C8CD320D4F939006A0756 /* Info.plist */,
 				398DF3E820CCFA72004E14E7 /* stations.json */,
 				39C7AB1D20D78EEF0021C8B2 /* station.json */,
 				39A34DDA20A43363004321D9 /* DataType.swift */,
 				39A34DAA20A42F5B004321D9 /* AppDelegate.swift */,
 				398A590920D4C8C5004F547C /* RealtimeSubwayLib.swift */,
-				CE5C8CD320D4F939006A0756 /* Info.plist */,
 				391B6B2720CD1E3C00FBEBE0 /* GeoConverter.swift */,
 				39A34DAE20A42F5B004321D9 /* Main.storyboard */,
+				39ACD8A920D8DEE900D48DC0 /* ViewController.swift */,
 				39A34DB120A42F5C004321D9 /* Assets.xcassets */,
 				39A34DB320A42F5C004321D9 /* LaunchScreen.storyboard */,
 				CE5C8C8F20D4E015006A0756 /* MainTableViewCell.swift */,
@@ -289,6 +292,7 @@
 				39A34DAB20A42F5B004321D9 /* AppDelegate.swift in Sources */,
 				CE5C8C9420D4EA52006A0756 /* MainTableViewController.swift in Sources */,
 				CE762FE020D50FCD005183B6 /* PageVC.swift in Sources */,
+				39ACD8AA20D8DEE900D48DC0 /* ViewController.swift in Sources */,
 				CE5C8C9020D4E015006A0756 /* MainTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
