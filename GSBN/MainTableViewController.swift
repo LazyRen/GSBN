@@ -182,7 +182,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                             else {
                                                 tmp.departTime = "\(t%60)초 후 출발하세요"
                                             }
-                                            if (t > 0 || passed) {
+                                            if (t > 0 || passed || tmp.isLast == 1) {
                                                 passed = false
                                                 if (t <= 0) {
                                                     tmp.departTime = "지금 출발하세요"
