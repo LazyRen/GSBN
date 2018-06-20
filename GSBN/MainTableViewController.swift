@@ -80,7 +80,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Get current position
         let location = locations.first!
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500)
+        curLoc = location
         let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
         let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
 
@@ -115,6 +115,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
 
                 // Create Annotation
                 destiAnno = stationAnnotation(title: fetchedStations.stationOrderList[0], subtitle: "Destination", coordinate: destinationCoordinates)
+                NotificationCenter.default.post(name: NSNotification.Name("annotationNotification"), object: nil)
                 
                 // Create request
                 let request = MKDirectionsRequest()
@@ -126,7 +127,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                 directions.calculate { response, error in
                     if let route = response?.routes.first {
                         print("Distance: \(route.distance), ETA: \(route.expectedTravelTime)")
-                        calcuatedETA = route.expectedTravelTime
+                        calcuatedETA = route.expectedTravelTime - 300
                     } else {
                         print("Error!")
                     }
@@ -134,6 +135,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                     curArrivalInfo.getArrivalInfo(completionHandler: { (fetchedArrivalInfo) in
                         fetchedArrivalInfo.keys.map({ (line) -> Void in
                             fetchedArrivalInfo[line]?.keys.map({ (updownFlag) -> Void in
+                                var passed = false
                                 if let entrys = fetchedArrivalInfo[line]?[updownFlag] {
                                     entrys.map({ (entry) -> Void in
                                         //print(line, entry.stationName, entry.directionInfo, entry.curStationName, entry.leftTimeMsg, String(entry.leftTime) + "초 후 도착")
@@ -180,7 +182,11 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                             else {
                                                 tmp.departTime = "\(t%60)초 후 출발하세요"
                                             }
-                                            if (t > 0) {
+                                            if (t > 0 || passed) {
+                                                passed = false
+                                                if (t <= 0) {
+                                                    tmp.departTime = "지금 출발하세요"
+                                                }
                                                 infoList.append(tmp)
                                                 print(tmp)
                                                 DispatchQueue.main.async(execute: {() -> Void in
@@ -188,6 +194,9 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                                                     self.stationName.text = self.stName
                                                     self.tableView?.reloadData();
                                                 })
+                                            }
+                                            else {
+                                                passed = true
                                             }
                                         }
                                         

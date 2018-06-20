@@ -206,7 +206,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bJa-WW-XAN">
-                                <rect key="frame" x="30" y="84" width="315" height="503"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahL-OW-zD9">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -228,12 +228,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ahL-OW-zD9" firstAttribute="leading" secondItem="arI-oz-teL" secondAttribute="leading" id="Ff5-RC-Z7s"/>
-                            <constraint firstItem="arI-oz-teL" firstAttribute="bottom" secondItem="bJa-WW-XAN" secondAttribute="bottom" constant="80" id="HoU-Vb-guN"/>
-                            <constraint firstItem="bJa-WW-XAN" firstAttribute="top" secondItem="ahL-OW-zD9" secondAttribute="bottom" constant="20" id="LK6-rs-29W"/>
-                            <constraint firstItem="bJa-WW-XAN" firstAttribute="leading" secondItem="arI-oz-teL" secondAttribute="leading" constant="30" id="Qfi-X8-i6h"/>
+                            <constraint firstItem="arI-oz-teL" firstAttribute="bottom" secondItem="bJa-WW-XAN" secondAttribute="bottom" id="HoU-Vb-guN"/>
+                            <constraint firstItem="bJa-WW-XAN" firstAttribute="top" secondItem="ahL-OW-zD9" secondAttribute="bottom" id="LK6-rs-29W"/>
+                            <constraint firstItem="bJa-WW-XAN" firstAttribute="leading" secondItem="arI-oz-teL" secondAttribute="leading" id="Qfi-X8-i6h"/>
                             <constraint firstItem="ahL-OW-zD9" firstAttribute="top" secondItem="arI-oz-teL" secondAttribute="top" id="ULx-yh-Bpd"/>
-                            <constraint firstItem="bJa-WW-XAN" firstAttribute="top" secondItem="arI-oz-teL" secondAttribute="top" constant="64" id="VXM-Rk-MpH"/>
-                            <constraint firstItem="arI-oz-teL" firstAttribute="trailing" secondItem="bJa-WW-XAN" secondAttribute="trailing" constant="30" id="YkM-gq-EoU"/>
+                            <constraint firstItem="bJa-WW-XAN" firstAttribute="top" secondItem="arI-oz-teL" secondAttribute="top" constant="44" id="VXM-Rk-MpH"/>
+                            <constraint firstItem="arI-oz-teL" firstAttribute="trailing" secondItem="bJa-WW-XAN" secondAttribute="trailing" id="YkM-gq-EoU"/>
                             <constraint firstItem="ahL-OW-zD9" firstAttribute="trailing" secondItem="arI-oz-teL" secondAttribute="trailing" id="uCy-ha-C3h"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="arI-oz-teL"/>

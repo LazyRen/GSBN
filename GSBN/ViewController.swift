@@ -10,15 +10,26 @@ import UIKit
 import CoreLocation
 import MapKit
 
-
+var curLoc : CLLocation = CLLocation.init()
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
    @IBOutlet weak var MyMapView: MKMapView!
-    
     let locationManager = CLLocationManager()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isBeingPresented || isMovingToParentViewController {
+            let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+            let coordinateRegion = MKCoordinateRegion(center:curLoc.coordinate,span: span)
+            MyMapView.setRegion(coordinateRegion, animated: true)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let annotationNotification = Notification.Name("annotationNotification")
+        NotificationCenter.default.addObserver(self, selector: #selector(addMapAnnotation(obj:)), name: annotationNotification, object: nil)
+        
         MyMapView.delegate = self
         MyMapView.showsPointsOfInterest = true
         MyMapView.showsUserLocation = true
@@ -29,11 +40,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Get current position
         let location = locations.first!
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 500, 500)
+        curLoc = location
+        
+//        let coordinateRegion = MKCoordinateRegion(center:location.coordinate,span: span)
 //        let sourcePlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
 //        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-        MyMapView.setRegion(coordinateRegion, animated: true)
-        
+//        MyMapView.setRegion(coordinateRegion, animated: true)
         
     }
     override func didReceiveMemoryWarning() {
@@ -41,9 +53,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         // Dispose of any resources that can be recreated.
     }
     
-    func addMapAnnotation(destiAnno: stationAnnotation?) {
+    @objc func addMapAnnotation(obj: Notification) {
         if let tmpAnno = destiAnno {
             MyMapView.addAnnotation(tmpAnno)
+            MyMapView.showAnnotations([tmpAnno], animated: true )
         }
     }
 
