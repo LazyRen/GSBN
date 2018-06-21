@@ -114,7 +114,7 @@ class MainTableViewController: UITableViewController, CLLocationManagerDelegate,
                 let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
 
                 // Create Annotation
-                destiAnno = stationAnnotation(title: fetchedStations.stationOrderList[0], subtitle: "Destination", coordinate: destinationCoordinates)
+                destiAnno = stationAnnotation(title: fetchedStations.stationOrderList[0] + "역", subtitle: "Destination", coordinate: destinationCoordinates)
                 NotificationCenter.default.post(name: NSNotification.Name("annotationNotification"), object: nil)
                 
                 // Create request

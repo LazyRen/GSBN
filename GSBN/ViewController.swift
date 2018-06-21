@@ -23,6 +23,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             let coordinateRegion = MKCoordinateRegion(center:curLoc.coordinate,span: span)
             MyMapView.setRegion(coordinateRegion, animated: true)
         }
+        if let tmpAnno = destiAnno {
+            MyMapView.showAnnotations([tmpAnno], animated: true )
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +60,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if let tmpAnno = destiAnno {
             MyMapView.addAnnotation(tmpAnno)
             MyMapView.showAnnotations([tmpAnno], animated: true )
+        }
+        else {
+            print("no anno")
         }
     }
 
