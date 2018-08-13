@@ -9,16 +9,16 @@
 			<key>swopenapi.seoul.go.kr</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true />
+				<true/>
 			</dict>
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When in use enable GPS location tracking</string>
+	<string>Your current location will be used to find nearest station and calculate ETA</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Always enable GPS location tracking</string>
+	<string>Your current location will be used to find nearest station and calculate ETA</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Enable GPS Location tracking</string>
+	<string>Your current location will be used to find nearest station and calculate ETA</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
